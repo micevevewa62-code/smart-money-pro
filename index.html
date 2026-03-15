@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Money Pro</title>
     
-    <!-- AdsGram Ad Script -->
-    <script async src="https://s.adson.biz/adsby/adsgram.js?pid=14386" crossorigin="anonymous"></script>
+    <!-- AdsGram Ad Script - সঠিকভাবে যোগ করা হয়েছে -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -513,7 +514,7 @@
                     </button>
                 </div>
 
-                <!-- Referral Section - UPDATED -->
+                <!-- Referral Section - FIXED -->
                 <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-lg text-white">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="font-bold text-lg">রেফার করুন & আয় করুন</h3>
@@ -521,7 +522,7 @@
                     </div>
                     <p class="text-sm mb-3">বন্ধুদের রেফার করুন এবং প্রতিটি সফল রেফারেলের জন্য ৳50 বোনাস পান!</p>
                     <div class="flex space-x-2">
-                        <input type="text" id="referral-link" readonly class="flex-1 p-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70" value="https://t.me/Smart_money_pro_xbot/app?startapp=">
+                        <input type="text" id="referral-link" readonly class="flex-1 p-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70">
                         <button id="copy-ref-link-btn" class="bg-white text-blue-600 font-bold px-4 py-2 rounded-lg text-sm">কপি</button>
                     </div>
                     <div class="flex justify-between items-center mt-3 text-sm">
@@ -545,7 +546,7 @@
                         <p class="text-sm text-gray-600">অ্যাডস বাকি: <span id="ads-left-count">...</span></p>
                     </div>
                     <div class="space-y-3">
-                        <!-- AdsGram Ad Button -->
+                        <!-- AdsGram Ad Button - UPDATED -->
                         <div class="bg-orange-500 p-3 rounded-lg flex items-center justify-between text-white">
                             <div class="flex items-center space-x-3">
                                 <span class="text-3xl">🤩</span>
@@ -827,7 +828,6 @@
         </div>
     </div>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         // ==================== CENTRALIZED CONFIGURATION ====================
         const DEFAULT_CONFIG = {
@@ -844,11 +844,10 @@
                 sponsorBonus: 20
             },
             
-            // AdsGram Settings
+            // AdsGram Settings - UPDATED with correct block ID
             adsgram: {
                 enabled: true,
-                scriptUrl: "https://s.adson.biz/adsby/adsgram.js?pid=25167",
-                blockId: "25167",
+                blockId: "int-25167",  // Your AdsGram block ID
                 rewardAmount: 10
             },
             
@@ -858,9 +857,9 @@
                 verificationLink: "https://t.me/Smart_money_pro_xbot"
             },
             
-            // Bot Settings - UPDATED with correct bot username
+            // Bot Settings - FIXED (username without @)
             bot: {
-                username: "Smart_money_pro_xbot",  // Updated bot username
+                username: "Smart_money_pro_xbot",  // No @ symbol
                 adminChatId: "7869753439",
                 reportChannelId: "@your_channel_username"
             },
@@ -957,7 +956,7 @@
         let isAdShowing = false;
         let adSystemReady = false;
         let adCount = 0;
-        let adsgramAd = null;
+        let AdController = null;  // AdsGram controller
         
         // Statistics variables
         let dailyStats = {
@@ -1235,7 +1234,7 @@
             document.getElementById('support-modal').classList.remove('active');
         };
 
-        // ==================== ADSGRAM AD SYSTEM ====================
+        // ==================== ADSGRAM AD SYSTEM - FIXED ====================
 
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram...');
@@ -1246,16 +1245,24 @@
             }
 
             try {
-                if (typeof Adsgram !== 'undefined') {
-                    adsgramAd = Adsgram.init({ 
+                // Check if Adsgram is available
+                if (typeof window.Adsgram !== 'undefined' && window.Adsgram) {
+                    // Initialize AdController with block ID
+                    AdController = window.Adsgram.init({ 
                         blockId: CONFIG.adsgram.blockId 
                     });
                     
-                    adSystemReady = true;
-                    console.log('✅ AdsGram initialized successfully');
-                    document.getElementById('ad-claim-btn').disabled = false;
+                    if (AdController) {
+                        adSystemReady = true;
+                        console.log('✅ AdsGram initialized successfully with block ID:', CONFIG.adsgram.blockId);
+                        document.getElementById('ad-claim-btn').disabled = false;
+                    } else {
+                        console.log('⚠️ AdController is null');
+                        setTimeout(initializeAdsGram, 2000);
+                    }
                 } else {
-                    console.log('⚠️ AdsGram not loaded yet, retrying...');
+                    console.log('⚠️ AdsGram not loaded yet, retrying in 2 seconds...');
+                    console.log('Adsgram object:', window.Adsgram);
                     setTimeout(initializeAdsGram, 2000);
                 }
             } catch (error) {
@@ -1299,11 +1306,15 @@
             try {
                 showAlert("অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
                 
-                if (adsgramAd) {
-                    const result = await adsgramAd.show();
+                if (AdController) {
+                    console.log('Showing ad with controller:', AdController);
+                    
+                    // Show the ad
+                    const result = await AdController.show();
                     
                     console.log('✅ Ad completed successfully:', result);
                     
+                    // User watched the ad till the end or closed it
                     adCount++;
                     
                     userData.dailyAdCount = adCount;
@@ -1321,7 +1332,8 @@
                     updateUI();
                     updateAdsLeftCount();
                 } else {
-                    throw new Error('AdsGram not initialized');
+                    console.error('AdController is null');
+                    throw new Error('AdsGram not initialized properly');
                 }
                 
             } catch (error) {
@@ -1332,7 +1344,9 @@
                 } else if (error.message && error.message.includes('блокировки')) {
                     showAlert("অ্যাড ব্লকার সক্রিয় আছে। অ্যাড ব্লকার বন্ধ করুন।");
                 } else {
-                    showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
+                    // Show the error details for debugging
+                    console.log('Ad error details:', error);
+                    showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন। (Error: " + (error.message || 'Unknown') + ")");
                 }
             } finally {
                 isAdShowing = false;
@@ -1462,6 +1476,9 @@
                 languageCode: user.language_code
             };
             
+            console.log('Telegram User:', currentUser);
+            console.log('Start Param:', tg.initDataUnsafe.start_param);
+            
             loadUserData();
         }
 
@@ -1495,11 +1512,10 @@
                     // Increment new users count
                     incrementStat('newUsers');
                     
-                    // Check for referral from start_param - UPDATED and FIXED
+                    // Check for referral from start_param
                     if (tg.initDataUnsafe.start_param) {
                         const referrerId = tg.initDataUnsafe.start_param;
                         console.log('Referrer ID from start_param:', referrerId);
-                        console.log('Current User ID:', currentUser.id.toString());
                         
                         if (referrerId && referrerId !== currentUser.id.toString()) {
                             userData.referrerId = referrerId;
@@ -1568,10 +1584,11 @@
             document.getElementById('profile-referral-count').textContent = referralCount;
             document.getElementById('profile-referral-earnings').textContent = referralEarnings;
             
-            // Update referral link with current user ID - FIXED
+            // Update referral link - FIXED: Remove @ symbol
             const referralInput = document.getElementById('referral-link');
             if (referralInput) {
                 referralInput.value = `https://t.me/${CONFIG.bot.username}/app?startapp=${currentUser.id}`;
+                console.log('Referral Link:', referralInput.value);
             }
             
             updateReferralRequirementInfo();
@@ -1676,6 +1693,8 @@
                 const referrerData = loadUserFromStorage(referrerId);
                 
                 if (referrerData) {
+                    console.log('Referrer found:', referrerData);
+                    
                     // Check if already referred
                     if (!referrerData.referrals) {
                         referrerData.referrals = [];
@@ -1704,10 +1723,8 @@
                         
                         console.log(`✅ Referral bonus awarded to ${referrerId}`);
                         
-                        // Send notification to admin
-                        if (CONFIG.bot.reportChannelId) {
-                            sendReferralNotification(referrerId, currentUser.id.toString());
-                        }
+                        // Show success message
+                        showAlert(`🎉 রেফারেল সফল! আপনার রেফারার ৫০ টাকা বোনাস পেয়েছেন।`);
                     } else {
                         console.log('User already referred by this referrer');
                     }
@@ -1719,16 +1736,15 @@
             }
         }
 
-        function sendReferralNotification(referrerId, referredId) {
-            console.log(`New referral: ${referrerId} referred ${referredId}`);
-        }
-
         function copyReferralLink() {
             const referralLink = `https://t.me/${CONFIG.bot.username}/app?startapp=${currentUser.id}`;
+            console.log('Copying referral link:', referralLink);
+            
             navigator.clipboard.writeText(referralLink).then(() => {
                 tg.HapticFeedback.notificationOccurred('success');
                 showAlert("রেফারেল লিংক কপি করা হয়েছে! 🎉");
-            }).catch(() => {
+            }).catch((error) => {
+                console.error('Copy error:', error);
                 showAlert("লিংক কপি করতে সমস্যা হয়েছে।");
             });
         }
