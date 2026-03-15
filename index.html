@@ -1689,7 +1689,7 @@
         }
 
         function copyReferralLink() {
-            const referralLink = `https://t.me/${CONFIG.bot.username}/app?startapp=${currentUser.id}`;
+            const referralLink = `https://t.me/${CONFIG.bot.username}?startapp=${currentUser.id}`;
             navigator.clipboard.writeText(referralLink).then(() => {
                 tg.HapticFeedback.notificationOccurred('success');
                 showAlert("রেফারেল লিংক কপি করা হয়েছে! 🎉");
