@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Money Pro</title>
     
-    <!-- AdsGram Ad Script - সঠিকভাবে যোগ করা হয়েছে -->
+    <!-- AdsGram Ad Script -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     
@@ -546,7 +546,7 @@
                         <p class="text-sm text-gray-600">অ্যাডস বাকি: <span id="ads-left-count">...</span></p>
                     </div>
                     <div class="space-y-3">
-                        <!-- AdsGram Ad Button - UPDATED -->
+                        <!-- AdsGram Ad Button -->
                         <div class="bg-orange-500 p-3 rounded-lg flex items-center justify-between text-white">
                             <div class="flex items-center space-x-3">
                                 <span class="text-3xl">🤩</span>
@@ -658,7 +658,7 @@
                 </div>
             </div>
 
-            <!-- Profile Page -->
+            <!-- Profile Page - REMOVED CONFIG EDITOR -->
             <div id="profile-page" class="p-4 space-y-6 sub-page">
                 <h2 class="text-xl font-bold text-center mb-4 text-slate-800">প্রোফাইল</h2>
                 <div class="flex flex-col items-center">
@@ -733,7 +733,7 @@
                 </div>
             </div>
 
-            <!-- Admin Panel Page -->
+            <!-- Admin Panel Page - REMOVED CONFIG EDITOR -->
             <div id="admin-panel" class="p-4 space-y-6 sub-page">
                 <div class="flex items-center justify-between mb-4">
                     <button onclick="navigateTo('profile-page')" class="flex items-center text-gray-600 hover:text-slate-800">
@@ -748,13 +748,6 @@
                     <h3 class="font-semibold mb-3 text-slate-800">বোনাস ডিস্ট্রিবিউশন</h3>
                     <input id="bonus-amount" type="number" placeholder="বোনাস পরিমাণ লিখুন" class="w-full p-3 rounded-lg input-field mb-3">
                     <button id="send-bonus-btn" class="w-full p-3 rounded-lg bg-green-600 text-white font-bold">সকল ইউজারকে বোনাস দিন</button>
-                </div>
-
-                <!-- Config Editor -->
-                <div class="card-bg p-4 rounded-lg">
-                    <h3 class="font-semibold mb-3 text-slate-800">কনফিগারেশন এডিটর</h3>
-                    <textarea id="config-editor" rows="10" class="w-full p-3 rounded-lg input-field mb-3 font-mono text-sm"></textarea>
-                    <button id="save-config-btn" class="w-full p-3 rounded-lg bg-blue-600 text-white font-bold">কনফিগ সেভ করুন</button>
                 </div>
 
                 <!-- Manual Report Button -->
@@ -829,8 +822,8 @@
     </div>
 
     <script>
-        // ==================== CENTRALIZED CONFIGURATION ====================
-        const DEFAULT_CONFIG = {
+        // ==================== FIXED CONFIGURATION - NO CONFIG EDITOR ====================
+        const CONFIG = {
             // App Settings
             app: {
                 name: "Smart Money Pro",
@@ -844,7 +837,7 @@
                 sponsorBonus: 20
             },
             
-            // AdsGram Settings - UPDATED with correct block ID
+            // AdsGram Settings - FIXED with correct block ID
             adsgram: {
                 enabled: true,
                 blockId: "int-25167",  // Your AdsGram block ID
@@ -933,21 +926,6 @@
                 }
             }
         };
-
-        // Load or initialize config
-        let CONFIG = {};
-        try {
-            const savedConfig = localStorage.getItem('app_config');
-            if (savedConfig) {
-                CONFIG = JSON.parse(savedConfig);
-            } else {
-                CONFIG = DEFAULT_CONFIG;
-                localStorage.setItem('app_config', JSON.stringify(DEFAULT_CONFIG));
-            }
-        } catch (e) {
-            console.error('Error loading config:', e);
-            CONFIG = DEFAULT_CONFIG;
-        }
 
         // ==================== APPLICATION VARIABLES ====================
         let currentUser = null;
@@ -1238,6 +1216,7 @@
 
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram...');
+            console.log('AdsGram block ID:', CONFIG.adsgram.blockId);
             
             if (!CONFIG.adsgram.enabled) {
                 console.log('⚠️ AdsGram is disabled in config');
@@ -1247,6 +1226,8 @@
             try {
                 // Check if Adsgram is available
                 if (typeof window.Adsgram !== 'undefined' && window.Adsgram) {
+                    console.log('AdsGram found, initializing...');
+                    
                     // Initialize AdController with block ID
                     AdController = window.Adsgram.init({ 
                         blockId: CONFIG.adsgram.blockId 
@@ -1254,7 +1235,7 @@
                     
                     if (AdController) {
                         adSystemReady = true;
-                        console.log('✅ AdsGram initialized successfully with block ID:', CONFIG.adsgram.blockId);
+                        console.log('✅ AdsGram initialized successfully');
                         document.getElementById('ad-claim-btn').disabled = false;
                     } else {
                         console.log('⚠️ AdController is null');
@@ -1262,7 +1243,6 @@
                     }
                 } else {
                     console.log('⚠️ AdsGram not loaded yet, retrying in 2 seconds...');
-                    console.log('Adsgram object:', window.Adsgram);
                     setTimeout(initializeAdsGram, 2000);
                 }
             } catch (error) {
@@ -1307,14 +1287,14 @@
                 showAlert("অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
                 
                 if (AdController) {
-                    console.log('Showing ad with controller:', AdController);
+                    console.log('Showing ad...');
                     
                     // Show the ad
                     const result = await AdController.show();
                     
                     console.log('✅ Ad completed successfully:', result);
                     
-                    // User watched the ad till the end or closed it
+                    // User watched the ad till the end
                     adCount++;
                     
                     userData.dailyAdCount = adCount;
@@ -1332,22 +1312,12 @@
                     updateUI();
                     updateAdsLeftCount();
                 } else {
-                    console.error('AdController is null');
                     throw new Error('AdsGram not initialized properly');
                 }
                 
             } catch (error) {
                 console.error('❌ Ad error:', error);
-                
-                if (error.message && error.message.includes('counter')) {
-                    showAlert("আজকের জন্য আপনার অ্যাড দেখার সীমা শেষ হয়েছে।");
-                } else if (error.message && error.message.includes('блокировки')) {
-                    showAlert("অ্যাড ব্লকার সক্রিয় আছে। অ্যাড ব্লকার বন্ধ করুন।");
-                } else {
-                    // Show the error details for debugging
-                    console.log('Ad error details:', error);
-                    showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন। (Error: " + (error.message || 'Unknown') + ")");
-                }
+                showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
             } finally {
                 isAdShowing = false;
                 adClaimBtn.classList.remove('btn-loading');
@@ -1584,7 +1554,7 @@
             document.getElementById('profile-referral-count').textContent = referralCount;
             document.getElementById('profile-referral-earnings').textContent = referralEarnings;
             
-            // Update referral link - FIXED: Remove @ symbol
+            // Update referral link - FIXED: No @ symbol
             const referralInput = document.getElementById('referral-link');
             if (referralInput) {
                 referralInput.value = `https://t.me/${CONFIG.bot.username}/app?startapp=${currentUser.id}`;
@@ -1638,7 +1608,7 @@
             } else if (pageId === 'notifications-page') {
                 loadNotifications();
             } else if (pageId === 'admin-panel') {
-                loadConfigInEditor();
+                // No config editor anymore
             }
         }
 
@@ -2085,27 +2055,6 @@
             }
         }
 
-        function loadConfigInEditor() {
-            const editor = document.getElementById('config-editor');
-            editor.value = JSON.stringify(CONFIG, null, 2);
-        }
-
-        function saveConfig() {
-            const editor = document.getElementById('config-editor');
-            try {
-                const newConfig = JSON.parse(editor.value);
-                CONFIG = newConfig;
-                localStorage.setItem('app_config', JSON.stringify(newConfig));
-                showAlert("কনফিগ সফলভাবে সেভ করা হয়েছে! পৃষ্ঠা রিলোড করুন।");
-                
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            } catch (e) {
-                showAlert("ভাল JSON ফরম্যাট লিখুন!");
-            }
-        }
-
         async function sendBonusToAllUsers() {
             const bonusAmount = parseInt(document.getElementById('bonus-amount').value);
             
@@ -2200,7 +2149,6 @@
             });
             
             document.getElementById('send-bonus-btn').addEventListener('click', sendBonusToAllUsers);
-            document.getElementById('save-config-btn').addEventListener('click', saveConfig);
             
             setupDailyJobs();
             setupVerificationButton();
