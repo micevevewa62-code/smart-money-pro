@@ -9,6 +9,11 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     
+    <!-- Monetag Ad Zones -->
+    <script src='//libtl.com/sdk.js' data-zone='9535867' data-sdk='show_9535867'></script>
+    <script src='//libtl.com/sdk.js' data-zone='9495003' data-sdk='show_9495003'></script>
+    <script src='//libtl.com/sdk.js' data-zone='9724593' data-sdk='show_9724593'></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -328,6 +333,15 @@
             font-size: 12px;
         }
         
+        /* Ad Zone Indicator */
+        .ad-zone-indicator {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 2px 6px;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+        
         /* Sponsor Page Styles */
         .sponsor-page {
             padding: 20px;
@@ -501,7 +515,7 @@
                     <button id="home-withdraw-btn" class="bg-orange-500 text-white font-semibold px-6 py-2 rounded-lg">উইথড্র</button>
                 </div>
 
-                <!-- Verification Button Section -->
+                <!-- Verification Button Section - 30 টাকা বোনাস -->
                 <div id="verification-section" class="bg-gradient-to-r from-green-500 to-green-600 p-4 rounded-lg text-white">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="font-bold text-lg">অ্যাকাউন্ট ভেরিফাই করুন</h3>
@@ -512,29 +526,6 @@
                         <i data-lucide="badge-check" class="w-5 h-5"></i>
                         ভেরিফাই করুন
                     </button>
-                </div>
-
-                <!-- Referral Section - FIXED -->
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-lg text-white">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-bold text-lg">রেফার করুন & আয় করুন</h3>
-                        <span class="referral-badge">+৳50</span>
-                    </div>
-                    <p class="text-sm mb-3">বন্ধুদের রেফার করুন এবং প্রতিটি সফল রেফারেলের জন্য ৳50 বোনাস পান!</p>
-                    <div class="flex space-x-2">
-                        <input type="text" id="referral-link" readonly class="flex-1 p-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70">
-                        <button id="copy-ref-link-btn" class="bg-white text-blue-600 font-bold px-4 py-2 rounded-lg text-sm">কপি</button>
-                    </div>
-                    <div class="flex justify-between items-center mt-3 text-sm">
-                        <div>
-                            <span class="font-semibold">টোটাল রেফারেল:</span>
-                            <span id="referral-count">0</span>
-                        </div>
-                        <div>
-                            <span class="font-semibold">রেফারেল আয়:</span>
-                            <span>৳<span id="referral-earnings">0</span></span>
-                        </div>
-                    </div>
                 </div>
 
                 <section>
@@ -551,11 +542,23 @@
                             <div class="flex items-center space-x-3">
                                 <span class="text-3xl">🤩</span>
                                 <div>
-                                    <h3 class="font-bold">শর্ট অ্যাড দেখুন</h3>
+                                    <h3 class="font-bold">AdsGram অ্যাড দেখুন</h3>
                                     <p class="text-xs font-medium">AdsGram - ৳10</p>
                                 </div>
                             </div>
                             <button id="ad-claim-btn" class="bg-white text-orange-500 font-bold px-6 py-2 rounded-lg text-sm btn">ক্লেইম</button>
+                        </div>
+                        
+                        <!-- Monetag Ad Button (New) -->
+                        <div class="bg-purple-600 p-3 rounded-lg flex items-center justify-between text-white">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-3xl">🎯</span>
+                                <div>
+                                    <h3 class="font-bold">Monetag অ্যাড দেখুন</h3>
+                                    <p class="text-xs font-medium">Monetag - ৳10 <span id="zone-indicator" class="ad-zone-indicator">Zone 1/3</span></p>
+                                </div>
+                            </div>
+                            <button id="monetag-ad-btn" class="bg-white text-purple-600 font-bold px-6 py-2 rounded-lg text-sm btn">ক্লেইম</button>
                         </div>
                         
                         <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-3 rounded-lg flex items-center justify-between text-white">
@@ -624,22 +627,7 @@
                 <div class="card-bg p-4 rounded-lg">
                     <h3 class="font-semibold mb-3 text-slate-800">উপার্জন উত্তোলন</h3>
                     <p class="text-sm text-gray-600 mb-1">বর্তমান ব্যালেন্স: <span class="font-bold text-accent">৳<span id="wallet-coin-balance">0</span></span></p>
-                    <p class="text-sm text-gray-600 mb-2">সর্বনিম্ন উত্তোলন: ৳<span id="min-withdrawal-info">2000</span></p>
-                    
-                    <!-- Referral Requirement Info -->
-                    <div id="referral-requirement-info" class="bg-yellow-100 border border-yellow-400 rounded-lg p-3 mb-3">
-                        <div class="flex items-center">
-                            <i data-lucide="alert-circle" class="w-5 h-5 text-yellow-600 mr-2"></i>
-                            <p class="text-sm text-yellow-800 font-medium">উইথড্র করার জন্য ন্যূনতম <span id="min-referrals-required">15</span>টি রেফার প্রয়োজন</p>
-                        </div>
-                        <div class="mt-2 flex justify-between items-center">
-                            <span class="text-xs text-yellow-700">আপনার রেফার সংখ্যা:</span>
-                            <span class="text-xs font-bold text-yellow-800"><span id="current-referral-count">0</span>/<span id="required-referral-count">15</span></span>
-                        </div>
-                        <div class="w-full bg-yellow-200 rounded-full h-2 mt-1">
-                            <div id="referral-progress-bar" class="bg-yellow-600 h-2 rounded-full" style="width: 0%"></div>
-                        </div>
-                    </div>
+                    <p class="text-sm text-gray-600 mb-2">সর্বনিম্ন উত্তোলন: ৳<span id="min-withdrawal-info">1000</span></p>
                     
                     <input id="withdraw-amount" type="number" placeholder="টাকার পরিমাণ লিখুন" class="w-full p-3 rounded-lg input-field mb-3">
                     <select id="withdraw-method" class="w-full p-3 rounded-lg input-field mb-3">
@@ -658,7 +646,7 @@
                 </div>
             </div>
 
-            <!-- Profile Page - REMOVED CONFIG EDITOR -->
+            <!-- Profile Page -->
             <div id="profile-page" class="p-4 space-y-6 sub-page">
                 <h2 class="text-xl font-bold text-center mb-4 text-slate-800">প্রোফাইল</h2>
                 <div class="flex flex-col items-center">
@@ -681,16 +669,8 @@
                         <span class="text-gray-600">ইউজার আইডি:</span>
                         <span id="profile-user-id" class="text-slate-800">123456</span>
                     </div>
-                    <div class="flex justify-between mt-2">
-                        <span class="text-gray-600">টোটাল রেফারেল:</span>
-                        <span id="profile-referral-count" class="text-slate-800">0</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">রেফারেল আয়:</span>
-                        <span class="text-green-600 font-semibold">৳<span id="profile-referral-earnings">0</span></span>
-                    </div>
                 </div>
-                <!-- Added admin panel access button for admin users -->
+                <!-- Admin panel access button for admin users -->
                 <div id="admin-access" class="hidden">
                     <button onclick="navigateTo('admin-panel')" class="w-full p-3 rounded-lg bg-purple-600 text-white font-bold mb-3">Admin Panel</button>
                 </div>
@@ -733,7 +713,7 @@
                 </div>
             </div>
 
-            <!-- Admin Panel Page - REMOVED CONFIG EDITOR -->
+            <!-- Admin Panel Page -->
             <div id="admin-panel" class="p-4 space-y-6 sub-page">
                 <div class="flex items-center justify-between mb-4">
                     <button onclick="navigateTo('profile-page')" class="flex items-center text-gray-600 hover:text-slate-800">
@@ -750,6 +730,33 @@
                     <button id="send-bonus-btn" class="w-full p-3 rounded-lg bg-green-600 text-white font-bold">সকল ইউজারকে বোনাস দিন</button>
                 </div>
 
+                <!-- Ad Zone Stats -->
+                <div class="card-bg p-4 rounded-lg">
+                    <h3 class="font-semibold mb-3 text-slate-800">Monetag জোন স্ট্যাটাস</h3>
+                    <div id="zone-stats" class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>জোন 1 (9535867):</span>
+                            <span id="zone1-status">✅ Active</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>জোন 2 (9495003):</span>
+                            <span id="zone2-status">✅ Active</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>জোন 3 (9724593):</span>
+                            <span id="zone3-status">✅ Active</span>
+                        </div>
+                        <div class="flex justify-between mt-2 pt-2 border-t border-gray-200">
+                            <span class="font-semibold">আজ Monetag দেখা হয়েছে:</span>
+                            <span id="today-monetag-count">0/30</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-semibold">আজ AdsGram দেখা হয়েছে:</span>
+                            <span id="today-adsgram-count">0/10</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Manual Report Button -->
                 <div class="card-bg p-4 rounded-lg">
                     <h3 class="font-semibold mb-3 text-slate-800">রিপোর্ট ম্যানেজমেন্ট</h3>
@@ -769,7 +776,7 @@
         </nav>
     </div>
     
-    <!-- Support Button (Small, Bottom Right) -->
+    <!-- Support Button -->
     <div class="support-btn" id="support-btn" onclick="openSupportModal()">
         <i class="fas fa-headset"></i>
     </div>
@@ -822,25 +829,33 @@
     </div>
 
     <script>
-        // ==================== FIXED CONFIGURATION - NO CONFIG EDITOR ====================
+        // ==================== UPDATED CONFIGURATION - NO REFERRAL SYSTEM ====================
         const CONFIG = {
             // App Settings
             app: {
                 name: "Smart Money Pro",
                 minWithdrawal: 1000,
-                minReferralsForWithdrawal: 10,
-                dailyAdLimit: 10,
-                dailyAdReward: 10,
+                dailyAdLimit: {
+                    adsgram: 10,      // AdsGram: 10 ads per day
+                    monetag: 30       // Monetag: 30 ads per day (3 zones)
+                },
+                adReward: 10,          // 10 taka per ad
                 dailyJobReward: 10,
-                referralBonus: 50,
-                joiningBonus: 30,
+                joiningBonus: 30,      // 30 taka joining bonus
                 sponsorBonus: 20
             },
             
-            // AdsGram Settings - FIXED with correct block ID
+            // AdsGram Settings
             adsgram: {
                 enabled: true,
-                blockId: "int-25167",  // Your AdsGram block ID
+                blockId: "int-25167",
+                rewardAmount: 10
+            },
+            
+            // Monetag Settings - 3 Zones
+            monetag: {
+                enabled: true,
+                zones: ['9535867', '9495003', '9724593'],
                 rewardAmount: 10
             },
             
@@ -850,9 +865,9 @@
                 verificationLink: "https://t.me/Smart_money_pro_xbot"
             },
             
-            // Bot Settings - FIXED (username without @)
+            // Bot Settings
             bot: {
-                username: "Smart_money_pro_xbot",  // No @ symbol
+                username: "Smart_money_pro_xbot",
                 adminChatId: "7793213912",
                 reportChannelId: "@smart_money_pro_bot"
             },
@@ -931,21 +946,35 @@
         let currentUser = null;
         let userData = null;
         let currentJobTracking = null;
-        let isAdShowing = false;
-        let adSystemReady = false;
-        let adCount = 0;
-        let AdController = null;  // AdsGram controller
+        
+        // AdsGram variables
+        let isAdsGramShowing = false;
+        let adsGramReady = false;
+        let adsGramCount = 0;
+        let AdController = null;
+        
+        // Monetag variables
+        let isMonetagShowing = false;
+        let monetagReady = false;
+        let monetagCount = 0;
+        let currentZoneIndex = 0;
         
         // Statistics variables
         let dailyStats = {
             date: new Date().toISOString().split('T')[0],
             newUsers: 0,
             totalUsers: 0,
-            adsWatched: 0,
+            adsGramWatched: 0,
+            monetagWatched: 0,
             jobsCompleted: 0,
             sponsorsCompleted: 0,
             totalWithdrawals: 0,
-            totalWithdrawalAmount: 0
+            totalWithdrawalAmount: 0,
+            zoneStats: {
+                '9535867': 0,
+                '9495003': 0,
+                '9724593': 0
+            }
         };
 
         const tg = window.Telegram.WebApp;
@@ -973,11 +1002,17 @@
                     date: today,
                     newUsers: 0,
                     totalUsers: totalUsers,
-                    adsWatched: 0,
+                    adsGramWatched: 0,
+                    monetagWatched: 0,
                     jobsCompleted: 0,
                     sponsorsCompleted: 0,
                     totalWithdrawals: 0,
-                    totalWithdrawalAmount: 0
+                    totalWithdrawalAmount: 0,
+                    zoneStats: {
+                        '9535867': 0,
+                        '9495003': 0,
+                        '9724593': 0
+                    }
                 };
             }
             
@@ -1002,6 +1037,18 @@
             }
             dailyStats.totalUsers = totalUsers;
             
+            saveDailyStats();
+        }
+
+        function incrementZoneStat(zoneId) {
+            if (!dailyStats.zoneStats) {
+                dailyStats.zoneStats = {
+                    '9535867': 0,
+                    '9495003': 0,
+                    '9724593': 0
+                };
+            }
+            dailyStats.zoneStats[zoneId] = (dailyStats.zoneStats[zoneId] || 0) + 1;
             saveDailyStats();
         }
 
@@ -1030,6 +1077,11 @@
                 }
             }
 
+            // Zone stats
+            const zone1Count = dailyStats.zoneStats?.['9535867'] || 0;
+            const zone2Count = dailyStats.zoneStats?.['9495003'] || 0;
+            const zone3Count = dailyStats.zoneStats?.['9724593'] || 0;
+
             const reportMessage = `
 📊 <b>স্মার্ট মানি প্রো - লাইভ রিপোর্ট</b>
 📅 তারিখ: ${dateStr} | ⏰ সময়: ${timeStr}
@@ -1042,7 +1094,11 @@
 └ সক্রিয় ইউজার: ${Math.floor(dailyStats.totalUsers * 0.6)} জন
 
 📈 <b>আজকের অ্যাক্টিভিটি:</b>
-├ AdsGram এড দেখা: ${dailyStats.adsWatched} টি
+├ AdsGram এড দেখা: ${dailyStats.adsGramWatched}/১০ টি
+├ Monetag এড দেখা: ${dailyStats.monetagWatched}/৩০ টি
+│  ├ জোন ১ (9535867): ${zone1Count} টি
+│  ├ জোন ২ (9495003): ${zone2Count} টি
+│  └ জোন ৩ (9724593): ${zone3Count} টি
 ├ ডেইলি জব সম্পন্ন: ${dailyStats.jobsCompleted} টি
 ├ স্পন্সর জয়েন: ${dailyStats.sponsorsCompleted} টি
 └ মোট উইথড্র: ${dailyStats.totalWithdrawals} টি (${dailyStats.totalWithdrawalAmount} টাকা)
@@ -1059,7 +1115,7 @@
 
             // Send to channel using Telegram Bot API
             try {
-                const botToken = '7793213912:AAFvPB1DZ8nrkUzXpwZPeXxplw6BNrirPxs'; // আপনার বট টোকেন দিন
+                const botToken = '7793213912:AAFvPB1DZ8nrkUzXpwZPeXxplw6BNrirPxs';
                 const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
                 
                 const response = await fetch(url, {
@@ -1212,7 +1268,7 @@
             document.getElementById('support-modal').classList.remove('active');
         };
 
-        // ==================== ADSGRAM AD SYSTEM - FIXED ====================
+        // ==================== ADSGRAM AD SYSTEM ====================
 
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram...');
@@ -1234,7 +1290,7 @@
                     });
                     
                     if (AdController) {
-                        adSystemReady = true;
+                        adsGramReady = true;
                         console.log('✅ AdsGram initialized successfully');
                         document.getElementById('ad-claim-btn').disabled = false;
                     } else {
@@ -1251,20 +1307,20 @@
             }
         }
 
-        async function claimReward() {
-            if (!adSystemReady) {
-                showAlert("অ্যাড সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
+        async function claimAdsGramReward() {
+            if (!adsGramReady) {
+                showAlert("AdsGram সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
                 return;
             }
 
-            if (isAdShowing) {
+            if (isAdsGramShowing) {
                 showAlert("অ্যাড ইতিমধ্যেই চলছে... দয়া করে অপেক্ষা করুন।");
                 return;
             }
 
             const today = new Date().toISOString().split('T')[0];
 
-            if (adCount >= CONFIG.app.dailyAdLimit) {
+            if (adsGramCount >= CONFIG.app.dailyAdLimit.adsgram) {
                 const now = new Date();
                 const tomorrow = new Date(now);
                 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -1274,55 +1330,249 @@
                 const hours = Math.floor(timeUntilReset / (1000 * 60 * 60));
                 const minutes = Math.floor((timeUntilReset % (1000 * 60 * 60)) / (1000 * 60));
                 
-                return showAlert(`আজকের জন্য আপনার মোট অ্যাড দেখার সীমা শেষ হয়েছে। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
+                return showAlert(`আজকের জন্য আপনার AdsGram অ্যাড দেখার সীমা শেষ হয়েছে (${adsGramCount}/10)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
             }
             
-            isAdShowing = true;
+            isAdsGramShowing = true;
             const adClaimBtn = document.getElementById('ad-claim-btn');
             adClaimBtn.classList.add('btn-loading');
-            adClaimBtn.textContent = 'অ্যাড চলছে...';
+            adClaimBtn.textContent = 'AdsGram অ্যাড চলছে...';
             adClaimBtn.disabled = true;
             
             try {
-                showAlert("অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
+                showAlert("AdsGram অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
                 
                 if (AdController) {
-                    console.log('Showing ad...');
+                    console.log('Showing AdsGram ad...');
                     
                     // Show the ad
                     const result = await AdController.show();
                     
-                    console.log('✅ Ad completed successfully:', result);
+                    console.log('✅ AdsGram ad completed successfully:', result);
                     
                     // User watched the ad till the end
-                    adCount++;
+                    adsGramCount++;
                     
-                    userData.dailyAdCount = adCount;
-                    userData.adCount = adCount;
-                    userData.lastAdWatchDate = today;
-                    userData.balance += CONFIG.app.dailyAdReward;
+                    userData.adsGramCount = adsGramCount;
+                    userData.lastAdsGramDate = today;
+                    userData.balance += CONFIG.app.adReward;
                     
                     // Update statistics
-                    incrementStat('adsWatched');
+                    incrementStat('adsGramWatched');
                     
                     saveUserToStorage(userData);
                     
-                    showAlert(`🎉 অভিনন্দন! আপনি ৳${CONFIG.app.dailyAdReward} উপার্জন করেছেন। (${adCount}/${CONFIG.app.dailyAdLimit})`);
+                    showAlert(`🎉 অভিনন্দন! আপনি AdsGram থেকে ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram})`);
                     
                     updateUI();
-                    updateAdsLeftCount();
+                    updateAdCounts();
                 } else {
                     throw new Error('AdsGram not initialized properly');
                 }
                 
             } catch (error) {
-                console.error('❌ Ad error:', error);
-                showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
+                console.error('❌ AdsGram error:', error);
+                showAlert("AdsGram অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
             } finally {
-                isAdShowing = false;
+                isAdsGramShowing = false;
                 adClaimBtn.classList.remove('btn-loading');
                 adClaimBtn.textContent = 'ক্লেইম';
                 adClaimBtn.disabled = false;
+            }
+        }
+
+        // ==================== MONETAG AD SYSTEM ====================
+
+        function initializeMonetag() {
+            console.log('🔧 Initializing Monetag Ad System...');
+            console.log('Monetag Zones:', CONFIG.monetag.zones);
+            
+            if (!CONFIG.monetag.enabled) {
+                console.log('⚠️ Monetag is disabled in config');
+                return;
+            }
+
+            // Check if ad functions are available
+            let availableZones = 0;
+            CONFIG.monetag.zones.forEach(zone => {
+                const adFuncName = `show_${zone}`;
+                if (typeof window[adFuncName] === 'function') {
+                    console.log(`✅ Zone ${zone} is ready`);
+                    availableZones++;
+                } else {
+                    console.log(`❌ Zone ${zone} not ready yet`);
+                }
+            });
+
+            if (availableZones > 0) {
+                monetagReady = true;
+                console.log(`✅ Monetag System Ready - ${availableZones}/3 zones available`);
+                document.getElementById('monetag-ad-btn').disabled = false;
+                
+                // Update zone status in admin panel
+                updateZoneStatus();
+            } else {
+                console.log('⚠️ No Monetag zones ready, retrying in 3 seconds...');
+                setTimeout(initializeMonetag, 3000);
+            }
+        }
+
+        function updateZoneStatus() {
+            const zone1 = document.getElementById('zone1-status');
+            const zone2 = document.getElementById('zone2-status');
+            const zone3 = document.getElementById('zone3-status');
+            const todayMonetag = document.getElementById('today-monetag-count');
+            const todayAdsGram = document.getElementById('today-adsgram-count');
+            
+            if (zone1) {
+                zone1.textContent = typeof window.show_9535867 === 'function' ? '✅ Active' : '❌ Inactive';
+            }
+            if (zone2) {
+                zone2.textContent = typeof window.show_9495003 === 'function' ? '✅ Active' : '❌ Inactive';
+            }
+            if (zone3) {
+                zone3.textContent = typeof window.show_9724593 === 'function' ? '✅ Active' : '❌ Inactive';
+            }
+            if (todayMonetag) {
+                todayMonetag.textContent = `${monetagCount}/${CONFIG.app.dailyAdLimit.monetag}`;
+            }
+            if (todayAdsGram) {
+                todayAdsGram.textContent = `${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram}`;
+            }
+            
+            // Update zone indicator on home page
+            const zoneIndicator = document.getElementById('zone-indicator');
+            if (zoneIndicator) {
+                const zoneNumber = currentZoneIndex + 1;
+                zoneIndicator.textContent = `Zone ${zoneNumber}/3`;
+            }
+        }
+
+        async function claimMonetagReward() {
+            if (!monetagReady) {
+                showAlert("Monetag সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
+                return;
+            }
+
+            if (isMonetagShowing) {
+                showAlert("অ্যাড ইতিমধ্যেই চলছে... দয়া করে অপেক্ষা করুন।");
+                return;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+
+            if (monetagCount >= CONFIG.app.dailyAdLimit.monetag) {
+                const now = new Date();
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                
+                const timeUntilReset = tomorrow - now;
+                const hours = Math.floor(timeUntilReset / (1000 * 60 * 60));
+                const minutes = Math.floor((timeUntilReset % (1000 * 60 * 60)) / (1000 * 60));
+                
+                return showAlert(`আজকের জন্য আপনার Monetag অ্যাড দেখার সীমা শেষ হয়েছে (${monetagCount}/30)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
+            }
+            
+            isMonetagShowing = true;
+            const monetagBtn = document.getElementById('monetag-ad-btn');
+            monetagBtn.classList.add('btn-loading');
+            monetagBtn.textContent = 'Monetag অ্যাড চলছে...';
+            monetagBtn.disabled = true;
+            
+            // Get current zone (rotate through 3 zones)
+            const currentZone = CONFIG.monetag.zones[currentZoneIndex];
+            const adFunction = `show_${currentZone}`;
+            
+            // Update zone indicator
+            const zoneIndicator = document.getElementById('zone-indicator');
+            if (zoneIndicator) {
+                zoneIndicator.textContent = `Zone ${currentZoneIndex + 1}/3`;
+            }
+            
+            try {
+                showAlert(`Monetag অ্যাড লোড হচ্ছে (Zone ${currentZoneIndex + 1}/3)... দয়া করে অপেক্ষা করুন।`);
+                
+                if (typeof window[adFunction] === 'function') {
+                    console.log(`Showing Monetag ad from zone: ${currentZone}`);
+                    await window[adFunction]();
+                    
+                    console.log(`✅ Monetag ad from zone ${currentZone} completed successfully`);
+                    
+                    // Increment counters
+                    monetagCount++;
+                    
+                    // Update zone index for next ad (rotate through zones)
+                    currentZoneIndex = (currentZoneIndex + 1) % CONFIG.monetag.zones.length;
+                    
+                    // Update user data
+                    userData.monetagCount = monetagCount;
+                    userData.lastMonetagDate = today;
+                    userData.balance += CONFIG.app.adReward;
+                    
+                    // Update statistics
+                    incrementStat('monetagWatched');
+                    incrementZoneStat(currentZone);
+                    
+                    saveUserToStorage(userData);
+                    
+                    const remainingAds = CONFIG.app.dailyAdLimit.monetag - monetagCount;
+                    showAlert(`🎉 অভিনন্দন! আপনি Monetag থেকে ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
+                    
+                    updateUI();
+                    updateAdCounts();
+                    updateZoneStatus();
+                    
+                } else {
+                    throw new Error(`Ad function ${adFunction} not available`);
+                }
+                
+            } catch (error) {
+                console.error('❌ Monetag error:', error);
+                
+                // Try fallback zones
+                let fallbackSuccess = false;
+                for (const zone of CONFIG.monetag.zones) {
+                    if (zone !== currentZone) {
+                        const fallbackFunction = `show_${zone}`;
+                        if (typeof window[fallbackFunction] === 'function') {
+                            try {
+                                console.log(`Trying fallback zone: ${zone}`);
+                                await window[fallbackFunction]();
+                                
+                                monetagCount++;
+                                userData.monetagCount = monetagCount;
+                                userData.lastMonetagDate = today;
+                                userData.balance += CONFIG.app.adReward;
+                                
+                                incrementStat('monetagWatched');
+                                incrementZoneStat(zone);
+                                
+                                saveUserToStorage(userData);
+                                
+                                showAlert(`🎉 অভিনন্দন! আপনি Monetag থেকে ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
+                                
+                                updateUI();
+                                updateAdCounts();
+                                updateZoneStatus();
+                                
+                                fallbackSuccess = true;
+                                break;
+                            } catch (e) {
+                                console.log(`Fallback zone ${zone} also failed`);
+                            }
+                        }
+                    }
+                }
+                
+                if (!fallbackSuccess) {
+                    showAlert("Monetag অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
+                }
+            } finally {
+                isMonetagShowing = false;
+                monetagBtn.classList.remove('btn-loading');
+                monetagBtn.textContent = 'ক্লেইম';
+                monetagBtn.disabled = false;
             }
         }
 
@@ -1380,19 +1630,6 @@
             localStorage.setItem(storageKey, JSON.stringify(jobs));
         }
 
-        function loadReferralsFromStorage(userId) {
-            const storageKey = `referrals_${userId}`;
-            const stored = localStorage.getItem(storageKey);
-            return stored ? JSON.parse(stored) : [];
-        }
-
-        function saveReferralToStorage(userId, referralData) {
-            const storageKey = `referrals_${userId}`;
-            const referrals = loadReferralsFromStorage(userId);
-            referrals.push(referralData);
-            localStorage.setItem(storageKey, JSON.stringify(referrals));
-        }
-
         // ==================== CORE APPLICATION FUNCTIONS ====================
 
         function initializeDarkMode() {
@@ -1447,7 +1684,6 @@
             };
             
             console.log('Telegram User:', currentUser);
-            console.log('Start Param:', tg.initDataUnsafe.start_param);
             
             loadUserData();
         }
@@ -1465,48 +1701,41 @@
                         name: currentUser.firstName + (currentUser.lastName ? ' ' + currentUser.lastName : ''),
                         username: currentUser.username || 'N/A',
                         balance: 0,
-                        dailyAdCount: 0,
-                        lastAdWatchDate: new Date().toISOString().split('T')[0],
+                        adsGramCount: 0,
+                        monetagCount: 0,
+                        lastAdsGramDate: new Date().toISOString().split('T')[0],
+                        lastMonetagDate: new Date().toISOString().split('T')[0],
                         isBlocked: false,
                         joinedVia: 'Telegram',
                         isVerified: false,
-                        referralCount: 0,
-                        referralEarnings: 0,
-                        referrals: [],
-                        referrerId: null,
-                        adCount: 0,
                         sponsorCount: 0,
+                        currentZoneIndex: 0,
                         createdAt: new Date().toISOString()
                     };
                     
                     // Increment new users count
                     incrementStat('newUsers');
                     
-                    // Check for referral from start_param
-                    if (tg.initDataUnsafe.start_param) {
-                        const referrerId = tg.initDataUnsafe.start_param;
-                        console.log('Referrer ID from start_param:', referrerId);
-                        
-                        if (referrerId && referrerId !== currentUser.id.toString()) {
-                            userData.referrerId = referrerId;
-                            // Award bonus to referrer
-                            setTimeout(() => {
-                                awardReferralBonus(referrerId);
-                            }, 2000);
-                        }
-                    }
-                    
                     saveUserToStorage(userData);
                 } else {
                     const today = new Date().toISOString().split('T')[0];
-                    if (userData.lastAdWatchDate !== today) {
-                        userData.dailyAdCount = 0;
-                        userData.adCount = 0;
-                        userData.lastAdWatchDate = today;
-                        saveUserToStorage(userData);
+                    
+                    // Reset AdsGram count if new day
+                    if (userData.lastAdsGramDate !== today) {
+                        userData.adsGramCount = 0;
+                        userData.lastAdsGramDate = today;
                     }
                     
-                    adCount = userData.adCount || 0;
+                    // Reset Monetag count if new day
+                    if (userData.lastMonetagDate !== today) {
+                        userData.monetagCount = 0;
+                        userData.lastMonetagDate = today;
+                        userData.currentZoneIndex = 0;
+                    }
+                    
+                    adsGramCount = userData.adsGramCount || 0;
+                    monetagCount = userData.monetagCount || 0;
+                    currentZoneIndex = userData.currentZoneIndex || 0;
                 }
                 
                 updateUI();
@@ -1546,49 +1775,15 @@
             
             document.getElementById('min-withdrawal-info').textContent = `${CONFIG.app.minWithdrawal}`;
             
-            const referralCount = userData.referralCount || 0;
-            const referralEarnings = userData.referralEarnings || 0;
-            
-            document.getElementById('referral-count').textContent = referralCount;
-            document.getElementById('referral-earnings').textContent = referralEarnings;
-            document.getElementById('profile-referral-count').textContent = referralCount;
-            document.getElementById('profile-referral-earnings').textContent = referralEarnings;
-            
-            // Update referral link - FIXED: No @ symbol
-            const referralInput = document.getElementById('referral-link');
-            if (referralInput) {
-                referralInput.value = `https://t.me/${CONFIG.bot.username}/app?startapp=${currentUser.id}`;
-                console.log('Referral Link:', referralInput.value);
-            }
-            
-            updateReferralRequirementInfo();
-            updateAdsLeftCount();
+            updateAdCounts();
             
             document.getElementById('joined-via').textContent = userData.joinedVia || 'Telegram';
             document.getElementById('profile-user-id').textContent = currentUser.id;
         }
 
-        function updateReferralRequirementInfo() {
-            const referralCount = userData.referralCount || 0;
-            const minReferrals = CONFIG.app.minReferralsForWithdrawal;
-            
-            document.getElementById('min-referrals-required').textContent = minReferrals;
-            document.getElementById('current-referral-count').textContent = referralCount;
-            document.getElementById('required-referral-count').textContent = minReferrals;
-            
-            const progressPercentage = Math.min((referralCount / minReferrals) * 100, 100);
-            document.getElementById('referral-progress-bar').style.width = `${progressPercentage}%`;
-            
-            if (referralCount >= minReferrals) {
-                document.getElementById('referral-requirement-info').style.display = 'none';
-            } else {
-                document.getElementById('referral-requirement-info').style.display = 'block';
-            }
-        }
-
-        function updateAdsLeftCount() {
-            const adsLeft = Math.max(0, CONFIG.app.dailyAdLimit - adCount);
-            document.getElementById('ads-left-count').textContent = adsLeft;
+        function updateAdCounts() {
+            const adsLeft = Math.max(0, CONFIG.app.dailyAdLimit.adsgram - adsGramCount);
+            document.getElementById('ads-left-count').textContent = `${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram}`;
         }
 
         function navigateTo(pageId) {
@@ -1608,7 +1803,7 @@
             } else if (pageId === 'notifications-page') {
                 loadNotifications();
             } else if (pageId === 'admin-panel') {
-                // No config editor anymore
+                updateZoneStatus();
             }
         }
 
@@ -1650,75 +1845,6 @@
             }, 5000);
         }
 
-        // ==================== REFERRAL SYSTEM - FIXED ====================
-
-        async function awardReferralBonus(referrerId) {
-            if (referrerId === currentUser.id.toString()) {
-                console.log('Cannot refer yourself');
-                return;
-            }
-
-            try {
-                console.log('Awarding referral bonus to:', referrerId);
-                const referrerData = loadUserFromStorage(referrerId);
-                
-                if (referrerData) {
-                    console.log('Referrer found:', referrerData);
-                    
-                    // Check if already referred
-                    if (!referrerData.referrals) {
-                        referrerData.referrals = [];
-                    }
-                    
-                    if (!referrerData.referrals.includes(currentUser.id.toString())) {
-                        // Update referrer data
-                        referrerData.referralCount = (referrerData.referralCount || 0) + 1;
-                        referrerData.referralEarnings = (referrerData.referralEarnings || 0) + CONFIG.app.referralBonus;
-                        referrerData.balance = (referrerData.balance || 0) + CONFIG.app.referralBonus;
-                        
-                        referrerData.referrals.push(currentUser.id.toString());
-                        
-                        // Save to localStorage
-                        saveUserToStorage(referrerData);
-                        
-                        // Save referral history
-                        const referralData = {
-                            referrerId: referrerId,
-                            referredUserId: currentUser.id.toString(),
-                            bonusAmount: CONFIG.app.referralBonus,
-                            createdAt: new Date().toISOString()
-                        };
-                        
-                        saveReferralToStorage(referrerId, referralData);
-                        
-                        console.log(`✅ Referral bonus awarded to ${referrerId}`);
-                        
-                        // Show success message
-                        showAlert(`🎉 রেফারেল সফল! আপনার রেফারার ৫০ টাকা বোনাস পেয়েছেন।`);
-                    } else {
-                        console.log('User already referred by this referrer');
-                    }
-                } else {
-                    console.log('Referrer not found:', referrerId);
-                }
-            } catch (error) {
-                console.error("Error awarding referral bonus:", error);
-            }
-        }
-
-        function copyReferralLink() {
-            const referralLink = `https://t.me/${CONFIG.bot.username}/app?startapp=${currentUser.id}`;
-            console.log('Copying referral link:', referralLink);
-            
-            navigator.clipboard.writeText(referralLink).then(() => {
-                tg.HapticFeedback.notificationOccurred('success');
-                showAlert("রেফারেল লিংক কপি করা হয়েছে! 🎉");
-            }).catch((error) => {
-                console.error('Copy error:', error);
-                showAlert("লিংক কপি করতে সমস্যা হয়েছে।");
-            });
-        }
-
         // ==================== NOTIFICATION SYSTEM ====================
 
         function loadNotifications() {
@@ -1741,8 +1867,8 @@
                     createdAt: new Date().toISOString()
                 },
                 {
-                    title: "রেফারেল বোনাস!",
-                    message: "বন্ধুদের রেফার করুন এবং প্রতি রেফারেলে ৫০ টাকা বোনাস পান!",
+                    title: "নতুন Monetag অ্যাড!",
+                    message: "এখন Monetag অ্যাড দেখেও টাকা উপার্জন করতে পারবেন। ৩টি জোন থেকে মোট ৩০টি অ্যাড দেখা যাবে প্রতিদিন!",
                     createdAt: new Date().toISOString()
                 }
             ];
@@ -1802,13 +1928,6 @@
             const paymentDetail = document.getElementById('payment-detail-input')?.value;
             
             const minWithdrawal = CONFIG.app.minWithdrawal;
-            const minReferrals = CONFIG.app.minReferralsForWithdrawal;
-            const referralCount = userData.referralCount || 0;
-            
-            if (referralCount < minReferrals) {
-                showAlert(`উইথড্র করার জন্য আপনার ন্যূনতম ${minReferrals}টি রেফার প্রয়োজন। আপনার আছে ${referralCount}টি রেফার।`);
-                return;
-            }
             
             if (!amount || amount < minWithdrawal) {
                 showAlert(`সর্বনিম্ন উত্তোলন পরিমাণ ৳${minWithdrawal}`);
@@ -2136,13 +2255,16 @@
                 });
             });
             
-            document.getElementById('ad-claim-btn').addEventListener('click', claimReward);
+            // AdsGram button
+            document.getElementById('ad-claim-btn').addEventListener('click', claimAdsGramReward);
+            
+            // Monetag button
+            document.getElementById('monetag-ad-btn').addEventListener('click', claimMonetagReward);
+            
             document.getElementById('notification-bell').addEventListener('click', () => { navigateTo('notifications-page'); loadNotifications(); });
             document.getElementById('withdraw-btn').addEventListener('click', handleWithdrawal);
             document.getElementById('home-withdraw-btn').addEventListener('click', () => navigateTo('wallet-page'));
             document.getElementById('withdraw-method').addEventListener('change', updateDynamicPaymentFields);
-            
-            document.getElementById('copy-ref-link-btn').addEventListener('click', copyReferralLink);
             
             document.getElementById('telegram-channel-btn').addEventListener('click', () => {
                 window.open(CONFIG.social.telegram, '_blank');
@@ -2173,6 +2295,9 @@
             
             // Initialize AdsGram
             setTimeout(initializeAdsGram, 2000);
+            
+            // Initialize Monetag
+            setTimeout(initializeMonetag, 3000);
             
             // Start cooldown timers
             updateCooldownTimers();
