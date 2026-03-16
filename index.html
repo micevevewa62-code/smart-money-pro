@@ -537,25 +537,25 @@
                         <p class="text-sm text-gray-600">অ্যাডস বাকি: <span id="ads-left-count">...</span></p>
                     </div>
                     <div class="space-y-3">
-                        <!-- AdsGram Ad Button -->
+                        <!-- Ad Button -->
                         <div class="bg-orange-500 p-3 rounded-lg flex items-center justify-between text-white">
                             <div class="flex items-center space-x-3">
                                 <span class="text-3xl">🤩</span>
                                 <div>
-                                    <h3 class="font-bold">AdsGram অ্যাড দেখুন</h3>
-                                    <p class="text-xs font-medium">AdsGram - ৳10</p>
+                                    <h3 class="font-bold">অ্যাড দেখুন</h3>
+                                    <p class="text-xs font-medium">Ads- ৳10</p>
                                 </div>
                             </div>
                             <button id="ad-claim-btn" class="bg-white text-orange-500 font-bold px-6 py-2 rounded-lg text-sm btn">ক্লেইম</button>
                         </div>
                         
-                        <!-- Monetag Ad Button (New) -->
+                        <!-- Ad Button (New) -->
                         <div class="bg-purple-600 p-3 rounded-lg flex items-center justify-between text-white">
                             <div class="flex items-center space-x-3">
                                 <span class="text-3xl">🎯</span>
                                 <div>
-                                    <h3 class="font-bold">Monetag অ্যাড দেখুন</h3>
-                                    <p class="text-xs font-medium">Monetag - ৳10 <span id="zone-indicator" class="ad-zone-indicator">Zone 1/3</span></p>
+                                    <h3 class="font-bold">অ্যাড দেখুন</h3>
+                                    <p class="text-xs font-medium">ads- ৳10 <span id="zone-indicator" class="ad-zone-indicator">Zone 1/3</span></p>
                                 </div>
                             </div>
                             <button id="monetag-ad-btn" class="bg-white text-purple-600 font-bold px-6 py-2 rounded-lg text-sm btn">ক্লেইম</button>
@@ -732,7 +732,7 @@
 
                 <!-- Ad Zone Stats -->
                 <div class="card-bg p-4 rounded-lg">
-                    <h3 class="font-semibold mb-3 text-slate-800">Monetag জোন স্ট্যাটাস</h3>
+                    <h3 class="font-semibold mb-3 text-slate-800">জোন স্ট্যাটাস</h3>
                     <div id="zone-stats" class="space-y-2 text-sm">
                         <div class="flex justify-between">
                             <span>জোন 1 (9535867):</span>
@@ -747,11 +747,11 @@
                             <span id="zone3-status">✅ Active</span>
                         </div>
                         <div class="flex justify-between mt-2 pt-2 border-t border-gray-200">
-                            <span class="font-semibold">আজ Monetag দেখা হয়েছে:</span>
+                            <span class="font-semibold">আজ দেখা হয়েছে:</span>
                             <span id="today-monetag-count">0/30</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="font-semibold">আজ AdsGram দেখা হয়েছে:</span>
+                            <span class="font-semibold">আজ দেখা হয়েছে:</span>
                             <span id="today-adsgram-count">0/10</span>
                         </div>
                     </div>
@@ -759,11 +759,11 @@
                 
                 <!-- Manual Report Button -->
                 <div class="card-bg p-4 rounded-lg">
-                    <h3 class="font-semibold mb-3 text-slate-800">রিপোর্ট ম্যানেজমেন্ট</h3>
+                    <h3 class="font-semibold mb-3 text-slate-800"></h3>
                     <button id="send-manual-report" class="w-full p-3 rounded-lg bg-purple-600 text-white font-bold mb-3">
-                        <i class="fas fa-paper-plane mr-2"></i> ম্যানুয়াল রিপোর্ট পাঠান
+                        <i class="fas fa-paper-plane mr-2"></i> 
                     </button>
-                    <p class="text-xs text-gray-600">অটো রিপোর্ট প্রতি ঘন্টায় চ্যানেলে যাবে</p>
+                    <p class="text-xs text-gray-600"></p>
                 </div>
             </div>
         </main>
@@ -799,14 +799,14 @@
                 <div class="support-option">
                     <a href="https://t.me/smartmoneypro_bot" target="_blank">
                         <i class="fas fa-comment-dots"></i>
-                        <span>লাইভ চ্যাট</span>
+                        <span></span>
                         <small>💬</small>
                     </a>
                 </div>
                 <div class="support-option">
                     <a href="mailto:support@smartmoneypro.com">
                         <i class="fas fa-envelope"></i>
-                        <span>ইমেইল সাপোর্ট</span>
+                        <span></span>
                         <small>📧</small>
                     </a>
                 </div>
@@ -841,7 +841,7 @@
                 },
                 adReward: 10,          // 10 taka per ad
                 dailyJobReward: 10,
-                joiningBonus: 30,      // 30 taka joining bonus
+                joiningBonus: 50,      // 30 taka joining bonus
                 sponsorBonus: 20
             },
             
@@ -1309,7 +1309,7 @@
 
         async function claimAdsGramReward() {
             if (!adsGramReady) {
-                showAlert("AdsGram সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
+                showAlert(" সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
                 return;
             }
 
@@ -1330,17 +1330,17 @@
                 const hours = Math.floor(timeUntilReset / (1000 * 60 * 60));
                 const minutes = Math.floor((timeUntilReset % (1000 * 60 * 60)) / (1000 * 60));
                 
-                return showAlert(`আজকের জন্য আপনার AdsGram অ্যাড দেখার সীমা শেষ হয়েছে (${adsGramCount}/10)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
+                return showAlert(`আজকের জন্য আপনার  অ্যাড দেখার সীমা শেষ হয়েছে (${adsGramCount}/10)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
             }
             
             isAdsGramShowing = true;
             const adClaimBtn = document.getElementById('ad-claim-btn');
             adClaimBtn.classList.add('btn-loading');
-            adClaimBtn.textContent = 'AdsGram অ্যাড চলছে...';
+            adClaimBtn.textContent = ' অ্যাড চলছে...';
             adClaimBtn.disabled = true;
             
             try {
-                showAlert("AdsGram অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
+                showAlert("অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
                 
                 if (AdController) {
                     console.log('Showing AdsGram ad...');
@@ -1348,7 +1348,7 @@
                     // Show the ad
                     const result = await AdController.show();
                     
-                    console.log('✅ AdsGram ad completed successfully:', result);
+                    console.log('✅ad completed successfully:', result);
                     
                     // User watched the ad till the end
                     adsGramCount++;
@@ -1362,17 +1362,17 @@
                     
                     saveUserToStorage(userData);
                     
-                    showAlert(`🎉 অভিনন্দন! আপনি AdsGram থেকে ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram})`);
+                    showAlert(`🎉 অভিনন্দন! আপনি ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram})`);
                     
                     updateUI();
                     updateAdCounts();
                 } else {
-                    throw new Error('AdsGram not initialized properly');
+                    throw new Error('not initialized properly');
                 }
                 
             } catch (error) {
-                console.error('❌ AdsGram error:', error);
-                showAlert("AdsGram অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
+                console.error('❌ error:', error);
+                showAlert(" অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
             } finally {
                 isAdsGramShowing = false;
                 adClaimBtn.classList.remove('btn-loading');
@@ -1384,7 +1384,7 @@
         // ==================== MONETAG AD SYSTEM ====================
 
         function initializeMonetag() {
-            console.log('🔧 Initializing Monetag Ad System...');
+            console.log('🔧 Initializing  Ad System...');
             console.log('Monetag Zones:', CONFIG.monetag.zones);
             
             if (!CONFIG.monetag.enabled) {
@@ -1406,13 +1406,13 @@
 
             if (availableZones > 0) {
                 monetagReady = true;
-                console.log(`✅ Monetag System Ready - ${availableZones}/3 zones available`);
+                console.log(`✅  System Ready - ${availableZones}/3 zones available`);
                 document.getElementById('monetag-ad-btn').disabled = false;
                 
                 // Update zone status in admin panel
                 updateZoneStatus();
             } else {
-                console.log('⚠️ No Monetag zones ready, retrying in 3 seconds...');
+                console.log('⚠️ No zones ready, retrying in 3 seconds...');
                 setTimeout(initializeMonetag, 3000);
             }
         }
@@ -1450,7 +1450,7 @@
 
         async function claimMonetagReward() {
             if (!monetagReady) {
-                showAlert("Monetag সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
+                showAlert("সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
                 return;
             }
 
@@ -1471,13 +1471,13 @@
                 const hours = Math.floor(timeUntilReset / (1000 * 60 * 60));
                 const minutes = Math.floor((timeUntilReset % (1000 * 60 * 60)) / (1000 * 60));
                 
-                return showAlert(`আজকের জন্য আপনার Monetag অ্যাড দেখার সীমা শেষ হয়েছে (${monetagCount}/30)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
+                return showAlert(`আজকের জন্য আপনার অ্যাড দেখার সীমা শেষ হয়েছে (${monetagCount}/30)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
             }
             
             isMonetagShowing = true;
             const monetagBtn = document.getElementById('monetag-ad-btn');
             monetagBtn.classList.add('btn-loading');
-            monetagBtn.textContent = 'Monetag অ্যাড চলছে...';
+            monetagBtn.textContent = 'অ্যাড চলছে...';
             monetagBtn.disabled = true;
             
             // Get current zone (rotate through 3 zones)
@@ -1491,13 +1491,13 @@
             }
             
             try {
-                showAlert(`Monetag অ্যাড লোড হচ্ছে (Zone ${currentZoneIndex + 1}/3)... দয়া করে অপেক্ষা করুন।`);
+                showAlert(` অ্যাড লোড হচ্ছে (Zone ${currentZoneIndex + 1}/3)... দয়া করে অপেক্ষা করুন।`);
                 
                 if (typeof window[adFunction] === 'function') {
-                    console.log(`Showing Monetag ad from zone: ${currentZone}`);
+                    console.log(`Showing ad from zone: ${currentZone}`);
                     await window[adFunction]();
                     
-                    console.log(`✅ Monetag ad from zone ${currentZone} completed successfully`);
+                    console.log(`✅ad from zone ${currentZone} completed successfully`);
                     
                     // Increment counters
                     monetagCount++;
@@ -1517,7 +1517,7 @@
                     saveUserToStorage(userData);
                     
                     const remainingAds = CONFIG.app.dailyAdLimit.monetag - monetagCount;
-                    showAlert(`🎉 অভিনন্দন! আপনি Monetag থেকে ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
+                    showAlert(`🎉 অভিনন্দন! আপনি ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
                     
                     updateUI();
                     updateAdCounts();
@@ -1528,7 +1528,7 @@
                 }
                 
             } catch (error) {
-                console.error('❌ Monetag error:', error);
+                console.error('❌  error:', error);
                 
                 // Try fallback zones
                 let fallbackSuccess = false;
@@ -1550,7 +1550,7 @@
                                 
                                 saveUserToStorage(userData);
                                 
-                                showAlert(`🎉 অভিনন্দন! আপনি Monetag থেকে ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
+                                showAlert(`🎉 অভিনন্দন!আ আপনি ${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
                                 
                                 updateUI();
                                 updateAdCounts();
@@ -1566,7 +1566,7 @@
                 }
                 
                 if (!fallbackSuccess) {
-                    showAlert("Monetag অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
+                    showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। আপনার মোবাইলে এড ব্লকার অথবা DNS চালু আছে। অ্যাড ব্লকার বন্ধ করে আবার চেষ্টা করুন।");
                 }
             } finally {
                 isMonetagShowing = false;
@@ -2155,7 +2155,7 @@
                     completeJobAfterValidation(currentJobTracking.jobId);
                 } else {
                     const remainingSeconds = Math.ceil((requiredTime - timeSpent) / 1000);
-                    showAlert(`⚠️ সতর্কবার্তা: আপনি খুব তাড়াতাড়ি ফিরে এসেছেন! অ্যাড দেখার জন্য আরো ${remainingSeconds} সেকেন্ড অপেক্ষা করুন।`);
+                    showAlert(`⚠️ সতর্কবার্তা: আপনি ১৫ সেকেন্ড এর আগে ফিরে এসেছেন! অ্যাড দেখার জন্য আরো ${remainingSeconds} সেকেন্ড অপেক্ষা করুন।`);
                 }
                 
                 currentJobTracking = null;
@@ -2294,10 +2294,10 @@
             loadDailyStats();
             
             // Initialize AdsGram
-            setTimeout(initializeAdsGram, 2000);
+            setTimeout(initializeAdsGram, 500);
             
             // Initialize Monetag
-            setTimeout(initializeMonetag, 3000);
+            setTimeout(initializeMonetag, 1000);
             
             // Start cooldown timers
             updateCooldownTimers();
