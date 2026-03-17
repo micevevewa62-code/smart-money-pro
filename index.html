@@ -10,9 +10,9 @@
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     
     <!-- Monetag Ad Zones -->
-    <script src='//libtl.com/sdk.js' data-zone='9535867' data-sdk='show_9535867'></script>
-    <script src='//libtl.com/sdk.js' data-zone='9495003' data-sdk='show_9495003'></script>
-    <script src='//libtl.com/sdk.js' data-zone='9724593' data-sdk='show_9724593'></script>
+    <script src='//libtl.com/sdk.js' data-zone='9730885' data-sdk='show_9730885'></script>
+    <script src='//libtl.com/sdk.js' data-zone='9500387' data-sdk='show_9500387'></script>
+    <script src='//libtl.com/sdk.js' data-zone='9715370' data-sdk='show_9715370'></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -855,7 +855,7 @@
             // Monetag Settings - 3 Zones
             monetag: {
                 enabled: true,
-                zones: ['9535867', '9495003', '9724593'],
+                zones: ['9730885', '9500387', '9715370'],
                 rewardAmount: 10
             },
             
@@ -971,9 +971,9 @@
             totalWithdrawals: 0,
             totalWithdrawalAmount: 0,
             zoneStats: {
-                '9535867': 0,
-                '9495003': 0,
-                '9724593': 0
+                '9730885': 0,
+                '9500387': 0,
+                '9715370': 0
             }
         };
 
@@ -1078,9 +1078,9 @@
             }
 
             // Zone stats
-            const zone1Count = dailyStats.zoneStats?.['9535867'] || 0;
-            const zone2Count = dailyStats.zoneStats?.['9495003'] || 0;
-            const zone3Count = dailyStats.zoneStats?.['9724593'] || 0;
+            const zone1Count = dailyStats.zoneStats?.['9730885'] || 0;
+            const zone2Count = dailyStats.zoneStats?.['9500387'] || 0;
+            const zone3Count = dailyStats.zoneStats?.['9715370'] || 0;
 
             const reportMessage = `
 📊 <b>স্মার্ট মানি প্রো - লাইভ রিপোর্ট</b>
@@ -1425,13 +1425,13 @@
             const todayAdsGram = document.getElementById('today-adsgram-count');
             
             if (zone1) {
-                zone1.textContent = typeof window.show_9535867 === 'function' ? '✅ Active' : '❌ Inactive';
+                zone1.textContent = typeof window.show_9730885 === 'function' ? '✅ Active' : '❌ Inactive';
             }
             if (zone2) {
-                zone2.textContent = typeof window.show_9495003 === 'function' ? '✅ Active' : '❌ Inactive';
+                zone2.textContent = typeof window.show_9500387 === 'function' ? '✅ Active' : '❌ Inactive';
             }
             if (zone3) {
-                zone3.textContent = typeof window.show_9724593 === 'function' ? '✅ Active' : '❌ Inactive';
+                zone3.textContent = typeof window.show_9715370 === 'function' ? '✅ Active' : '❌ Inactive';
             }
             if (todayMonetag) {
                 todayMonetag.textContent = `${monetagCount}/${CONFIG.app.dailyAdLimit.monetag}`;
@@ -1858,7 +1858,7 @@
                 },
                 {
                     title: "বোনাস অফার!",
-                    message: "আজই আপনার অ্যাকাউন্ট ভেরিফাই করুন এবং ৳30 বোনাস পান!",
+                    message: "আজই আপনার অ্যাকাউন্ট ভেরিফাই করুন এবং ৳50 বোনাস পান!",
                     createdAt: new Date().toISOString()
                 },
                 {
@@ -1868,7 +1868,7 @@
                 },
                 {
                     title: "নতুন Monetag অ্যাড!",
-                    message: "এখন Monetag অ্যাড দেখেও টাকা উপার্জন করতে পারবেন। ৩টি জোন থেকে মোট ৩০টি অ্যাড দেখা যাবে প্রতিদিন!",
+                    message: "এখন অ্যাড দেখেও টাকা উপার্জন করতে পারবেন। ৩টি জোন থেকে মোট ৩০টি অ্যাড দেখা যাবে প্রতিদিন!",
                     createdAt: new Date().toISOString()
                 }
             ];
