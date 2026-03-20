@@ -695,9 +695,9 @@
             // App Settings
             app: {
                 name: "Smart Money Pro",
-                minWithdrawal: 1500,
+                minWithdrawal: 2000,
                 dailyAdLimit: {
-                    adsgram: 10,
+                    adsgram: 5,
                     monetag: 30
                 },
                 adReward: 10,
@@ -730,7 +730,7 @@
             bot: {
                 username: "Smart_money_pro_xbot",
                 adminChatId: "7793213912",
-                reportChannelId: "@smart_money_pro_bot"
+                reportChannelId: "-1003331749273"
             },
             
             // Support - Telegraph Page
@@ -771,7 +771,7 @@
                 sponsor1: {
                     name: "স্পন্সর ১ - all video downloader",
                     icon: "all video downloader",
-                    link: "https://all-video-downloader-rose.vercel.app",
+                    link: "https://t.me/videodownloadertgxbot",
                     reward: 20
                 },
                 sponsor2: {
@@ -872,7 +872,7 @@
                     const hours = Math.floor(cooldownTime / (60 * 60 * 1000));
                     const minutes = Math.floor((cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
                     buttonText = `${hours}ঘ ${minutes}মি পর`;
-                    buttonDisabled = true;
+                    buttonDisabled = false;
                 }
                 
                 sponsorCard.innerHTML = `
@@ -894,7 +894,7 @@
             }
             
             // Update timers every minute
-            setTimeout(updateSponsorTimers, 60000);
+            setTimeout(updateSponsorTimers, 6000);
         }
 
         function getSponsorStatus(sponsorId) {
@@ -1775,6 +1775,14 @@
             const listEl = document.getElementById('notifications-list');
             
             const notifications = [
+                
+                
+                {
+                    title: "পেমেন্ট আপডেট!",
+                    message: "সকল ইউজার দের পেমেন্ট দেওয়া হয়েছে। উইথড্র রিকোয়েস্ট বেশি হওয়ায় মিনিমাম উইথড্র ১০০০ থেকে ২০০০ টাকা করা হয়েছে।সবাই কাজ করুন আর দ্রুত উইথড্র দেন!",
+                    createdAt: new Date().toISOString()
+                }
+                
                 {
                     title: "স্বাগতম!",
                     message: "Smart Money Pro-তে আপনাকে স্বাগতম! টাস্ক সম্পন্ন করে টাকা উপার্জন শুরু করুন।",
