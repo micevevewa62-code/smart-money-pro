@@ -384,13 +384,13 @@
 <body class="max-w-md mx-auto">
 
     <!-- App Loader -->
-    <div id="loader" class="hidden fixed inset-0 dark-bg bg-opacity-75 flex items-center justify-center z-50">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-accent"></div>
+    <div id="loader" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-orange-500"></div>
     </div>
 
     <!-- Main App Container -->
     <div id="app-container" class="min-h-screen flex-col main-page active">
-        <header class="flex items-center justify-between p-4 sticky top-0 bg-opacity-80 backdrop-blur-md z-10 dark-bg border-b border-gray-200">
+        <header class="flex items-center justify-between p-4 sticky top-0 bg-opacity-80 backdrop-blur-md z-10 bg-white dark-bg border-b border-gray-200">
             <h1 class="text-xl font-bold text-slate-800">Smart Money Pro</h1>
             <div class="flex items-center space-x-4">
                 <!-- Dark Mode Toggle Button -->
@@ -528,7 +528,7 @@
                 <div class="card-bg p-4 rounded-lg">
                     <h3 class="font-semibold mb-3 text-slate-800">উপার্জন উত্তোলন</h3>
                     <p class="text-sm text-gray-600 mb-1">বর্তমান ব্যালেন্স: <span class="font-bold text-accent">৳<span id="wallet-coin-balance">0</span></span></p>
-                    <p class="text-sm text-gray-600 mb-2">সর্বনিম্ন উত্তোলন: ৳<span id="min-withdrawal-info">1000</span></p>
+                    <p class="text-sm text-gray-600 mb-2">সর্বনিম্ন উত্তোলন: ৳<span id="min-withdrawal-info">2000</span></p>
                     
                     <input id="withdraw-amount" type="number" placeholder="টাকার পরিমাণ লিখুন" class="w-full p-3 rounded-lg input-field mb-3">
                     <select id="withdraw-method" class="w-full p-3 rounded-lg input-field mb-3">
@@ -636,15 +636,15 @@
                     <h3 class="font-semibold mb-3 text-slate-800">জোন স্ট্যাটাস</h3>
                     <div id="zone-stats" class="space-y-2 text-sm">
                         <div class="flex justify-between">
-                            <span>জোন 1 (9535867):</span>
+                            <span>জোন 1 (9730885):</span>
                             <span id="zone1-status">✅ Active</span>
                         </div>
                         <div class="flex justify-between">
-                            <span>জোন 2 (9495003):</span>
+                            <span>জোন 2 (9500387):</span>
                             <span id="zone2-status">✅ Active</span>
                         </div>
                         <div class="flex justify-between">
-                            <span>জোন 3 (9724593):</span>
+                            <span>জোন 3 (9715370):</span>
                             <span id="zone3-status">✅ Active</span>
                         </div>
                         <div class="flex justify-between mt-2 pt-2 border-t border-gray-200">
@@ -660,11 +660,11 @@
                 
                 <!-- Manual Report Button -->
                 <div class="card-bg p-4 rounded-lg">
-                    <h3 class="font-semibold mb-3 text-slate-800"></h3>
+                    <h3 class="font-semibold mb-3 text-slate-800">রিপোর্ট</h3>
                     <button id="send-manual-report" class="w-full p-3 rounded-lg bg-purple-600 text-white font-bold mb-3">
-                        <i class="fas fa-paper-plane mr-2"></i> 
+                        <i class="fas fa-paper-plane mr-2"></i> ম্যানুয়াল রিপোর্ট পাঠান
                     </button>
-                    <p class="text-xs text-gray-600"></p>
+                    <p class="text-xs text-gray-600">প্রতি ১ ঘন্টা পর পর স্বয়ংক্রিয় রিপোর্ট যায়</p>
                 </div>
             </div>
         </main>
@@ -690,14 +690,13 @@
     </div>
 
     <script>
-        // ==================== UPDATED CONFIGURATION ====================
+        // ==================== CONFIGURATION ====================
         const CONFIG = {
-            // App Settings
             app: {
                 name: "Smart Money Pro",
                 minWithdrawal: 2000,
                 dailyAdLimit: {
-                    adsgram: 5,
+                    adsgram: 10,
                     monetag: 30
                 },
                 adReward: 10,
@@ -706,43 +705,36 @@
                 sponsorBonus: 20
             },
             
-            // AdsGram Settings
             adsgram: {
                 enabled: true,
                 blockId: "int-25167",
                 rewardAmount: 10
             },
             
-            // Monetag Settings - 3 Zones
             monetag: {
                 enabled: true,
                 zones: ['9730885', '9500387', '9715370'],
                 rewardAmount: 10
             },
             
-            // Social Links
             social: {
                 telegram: "https://t.me/+tLB334Ko71tjY2Y1",
                 verificationLink: "https://t.me/Smart_money_pro_xbot"
             },
             
-            // Bot Settings
             bot: {
                 username: "Smart_money_pro_xbot",
                 adminChatId: "7793213912",
                 reportChannelId: "-1003331749273"
             },
             
-            // Support - Telegraph Page
             support: {
-                telegraphUrl: "https://t.me/smartmoneypro_bot", // Update with your Telegraph page URL
+                telegraphUrl: "https://t.me/smartmoneypro_bot",
                 telegramContact: "https://t.me/smartmoneypro_bot"
             },
             
-            // Payment Methods
             paymentMethods: ["Bkash", "Nagad", "Rocket", "Bank"],
             
-            // Job Links (Daily Jobs - 20)
             dailyJobLinks: {
                 job1: "https://omg10.com/4/9717825",
                 job2: "https://omg10.com/4/9429975",
@@ -766,17 +758,16 @@
                 job20: "https://omg10.com/4/9570590"
             },
             
-            // Sponsor Buttons (5 buttons with links) - 2 hour cooldown
             sponsorButtons: {
                 sponsor1: {
                     name: "স্পন্সর ১ - all video downloader",
-                    icon: "all video downloader",
+                    icon: "fas fa-download",
                     link: "https://t.me/videodownloadertgxbot",
                     reward: 20
                 },
                 sponsor2: {
-                    name: "all movie and drama streaming and download",
-                    icon: "fab fa-movie flex",
+                    name: "স্পন্সর ২ - all movie and drama streaming",
+                    icon: "fas fa-film",
                     link: "https://t.me/movieflex00bot",
                     reward: 20
                 },
@@ -840,174 +831,66 @@
 
         // ==================== SUPPORT PAGE FUNCTION ====================
         window.openSupportPage = function() {
-            // Open Telegraph support page
             tg.openLink(CONFIG.support.telegraphUrl);
         };
 
-        // ==================== SPONSOR SYSTEM WITH 24 HOUR COOLDOWN ====================
-
-        function loadSponsorButtons() {
-            const container = document.getElementById('sponsor-container');
-            if (!container) return;
+        // ==================== FIXED: LOAD USER FROM STORAGE ====================
+        function loadUserFromStorage(userId) {
+            const storageKey = `user_${userId}`;
+            const storedData = localStorage.getItem(storageKey);
             
-            container.innerHTML = '';
-            
-            for (let i = 1; i <= 5; i++) {
-                const sponsor = CONFIG.sponsorButtons[`sponsor${i}`];
-                if (!sponsor) continue;
-                
-                const sponsorStatus = getSponsorStatus(i);
-                const isCompleted = sponsorStatus.completed;
-                const cooldownTime = sponsorStatus.cooldownTime;
-                
-                const sponsorCard = document.createElement('div');
-                sponsorCard.className = `sponsor-card ${isCompleted ? 'completed' : ''}`;
-                sponsorCard.id = `sponsor-${i}`;
-                
-                let buttonText = isCompleted ? 'সম্পন্ন হয়েছে' : 'এখনই জয়েন করুন';
-                let buttonDisabled = isCompleted;
-                
-                // If in cooldown but not completed, show timer
-                if (cooldownTime > 0 && !isCompleted) {
-                    const hours = Math.floor(cooldownTime / (60 * 60 * 1000));
-                    const minutes = Math.floor((cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
-                    buttonText = `${hours}ঘ ${minutes}মি পর`;
-                    buttonDisabled = false;
-                }
-                
-                sponsorCard.innerHTML = `
-                    <div class="sponsor-card-header">
-                        <div class="sponsor-icon">
-                            <i class="${sponsor.icon}"></i>
-                        </div>
-                        <div class="sponsor-title">${sponsor.name}</div>
-                    </div>
-                    <div class="sponsor-reward">
-                        <i class="fas fa-coins"></i> +${sponsor.reward} টাকা বোনাস
-                    </div>
-                    <button class="sponsor-btn" onclick="handleSponsorClick(${i})" ${buttonDisabled ? 'disabled' : ''}>
-                        ${buttonText}
-                    </button>
-                `;
-                
-                container.appendChild(sponsorCard);
-            }
-            
-            // Update timers every minute
-            setTimeout(updateSponsorTimers, 6000);
-        }
-
-        function getSponsorStatus(sponsorId) {
-            if (!currentUser) return { completed: false, cooldownTime: 0 };
-            
-            const sponsorKey = `sponsor_${currentUser.id}_${sponsorId}`;
-            const sponsorData = localStorage.getItem(sponsorKey);
-            
-            if (!sponsorData) {
-                return { completed: false, cooldownTime: 0 };
-            }
-            
-            try {
-                const data = JSON.parse(sponsorData);
-                const now = new Date().getTime();
-                const completedAt = new Date(data.completedAt).getTime();
-                const twentyFourHours = 24 * 60 * 60 * 1000;
-                const timeElapsed = now - completedAt;
-                
-                if (timeElapsed < twentyFourHours) {
-                    // In cooldown period
-                    const cooldownTime = twentyFourHours - timeElapsed;
-                    return { completed: true, cooldownTime: cooldownTime };
-                } else {
-                    // Cooldown finished - can claim again
-                    return { completed: false, cooldownTime: 0 };
-                }
-            } catch (e) {
-                return { completed: false, cooldownTime: 0 };
-            }
-        }
-
-        function updateSponsorTimers() {
-            if (!currentUser) return;
-            
-            for (let i = 1; i <= 5; i++) {
-                const sponsorCard = document.getElementById(`sponsor-${i}`);
-                if (!sponsorCard) continue;
-                
-                const sponsorStatus = getSponsorStatus(i);
-                const button = sponsorCard.querySelector('button');
-                
-                if (sponsorStatus.cooldownTime > 0 && !sponsorStatus.completed) {
-                    const hours = Math.floor(sponsorStatus.cooldownTime / (60 * 60 * 1000));
-                    const minutes = Math.floor((sponsorStatus.cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
-                    button.textContent = `${hours}ঘ ${minutes}মি পর`;
-                    button.disabled = true;
-                } else if (sponsorStatus.cooldownTime === 0 && !sponsorStatus.completed) {
-                    button.textContent = 'এখনই জয়েন করুন';
-                    button.disabled = false;
-                    sponsorCard.classList.remove('completed');
-                } else if (sponsorStatus.completed && sponsorStatus.cooldownTime > 0) {
-                    button.textContent = 'সম্পন্ন হয়েছে';
-                    button.disabled = true;
-                    sponsorCard.classList.add('completed');
-                }
-            }
-        }
-
-        window.handleSponsorClick = async function(sponsorId) {
-            if (!currentUser) {
-                showAlert("লগইন করুন।");
-                return;
-            }
-            
-            const sponsorStatus = getSponsorStatus(sponsorId);
-            
-            if (sponsorStatus.completed && sponsorStatus.cooldownTime > 0) {
-                const hours = Math.floor(sponsorStatus.cooldownTime / (60 * 60 * 1000));
-                const minutes = Math.floor((sponsorStatus.cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
-                showAlert(`আপনি ইতিমধ্যে এই স্পন্সরে জয়েন করেছেন। আবার জয়েন করতে ${hours} ঘন্টা ${minutes} মিনিট অপেক্ষা করুন।`);
-                return;
-            }
-            
-            const sponsor = CONFIG.sponsorButtons[`sponsor${sponsorId}`];
-            if (!sponsor) return;
-            
-            // Open sponsor link
-            tg.openLink(sponsor.link);
-            
-            showAlert("স্পন্সরে জয়েন করার জন্য অপেক্ষা করুন... ৫ সেকেন্ড পর বোনাস যোগ হবে।");
-            
-            setTimeout(async () => {
+            if (storedData) {
                 try {
-                    // Save sponsor completion data with timestamp
-                    const sponsorKey = `sponsor_${currentUser.id}_${sponsorId}`;
-                    const sponsorData = {
-                        completedAt: new Date().toISOString(),
-                        sponsorId: sponsorId
-                    };
-                    localStorage.setItem(sponsorKey, JSON.stringify(sponsorData));
-                    
-                    // Add bonus
-                    const bonus = CONFIG.app.sponsorBonus || 20;
-                    userData.balance += bonus;
-                    
-                    // Update statistics
-                    incrementStat('sponsorsCompleted');
-                    
-                    saveUserToStorage(userData);
-                    updateUI();
-                    
-                    // Update button UI
-                    updateSponsorTimers();
-                    
-                    showAlert(`🎉 স্পন্সরে জয়েন করার জন্য ৳${bonus} বোনাস পেয়েছেন! আবার জয়েন করতে পারবেন ২৪ ঘন্টা পর।`);
-                    
-                } catch (error) {
-                    console.error("Error processing sponsor bonus:", error);
-                    showAlert("বোনাস প্রদানে সমস্যা হয়েছে।");
+                    const parsedData = JSON.parse(storedData);
+                    console.log('✅ User data loaded from storage:', parsedData);
+                    return parsedData;
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+                    return null;
                 }
-            }, 5000);
-        };
+            }
+            console.log('No existing user data found for:', userId);
+            return null;
+        }
+
+        function saveUserToStorage(userData) {
+            if (!currentUser) return;
+            const storageKey = `user_${currentUser.id}`;
+            localStorage.setItem(storageKey, JSON.stringify(userData));
+            console.log('💾 User data saved to storage:', userData);
+        }
+
+        function loadWithdrawalsFromStorage(userId) {
+            const storageKey = `withdrawals_${userId}`;
+            const stored = localStorage.getItem(storageKey);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveWithdrawalToStorage(userId, withdrawal) {
+            const storageKey = `withdrawals_${userId}`;
+            const withdrawals = loadWithdrawalsFromStorage(userId);
+            withdrawals.push(withdrawal);
+            localStorage.setItem(storageKey, JSON.stringify(withdrawals));
+            
+            if (dailyStats) {
+                dailyStats.totalWithdrawals++;
+                dailyStats.totalWithdrawalAmount += withdrawal.amount;
+                saveDailyStats();
+            }
+        }
+
+        function loadDailyJobsFromStorage(userId) {
+            const storageKey = `daily_jobs_${userId}`;
+            const stored = localStorage.getItem(storageKey);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveDailyJobToStorage(userId, jobData) {
+            const storageKey = `daily_jobs_${userId}`;
+            const jobs = loadDailyJobsFromStorage(userId);
+            jobs.push(jobData);
+            localStorage.setItem(storageKey, JSON.stringify(jobs));
+        }
 
         // ==================== STATISTICS FUNCTIONS ====================
 
@@ -1019,11 +902,10 @@
             if (savedStats) {
                 dailyStats = JSON.parse(savedStats);
             } else {
-                // Calculate total users
                 let totalUsers = 0;
                 for (let i = 0; i < localStorage.length; i++) {
                     const key = localStorage.key(i);
-                    if (key.startsWith('user_')) {
+                    if (key && key.startsWith('user_')) {
                         totalUsers++;
                     }
                 }
@@ -1039,9 +921,9 @@
                     totalWithdrawals: 0,
                     totalWithdrawalAmount: 0,
                     zoneStats: {
-                        '9535867': 0,
-                        '9495003': 0,
-                        '9724593': 0
+                        '9730885': 0,
+                        '9500387': 0,
+                        '9715370': 0
                     }
                 };
             }
@@ -1055,31 +937,27 @@
         }
 
         function incrementStat(statName) {
-            dailyStats[statName] = (dailyStats[statName] || 0) + 1;
-            
-            // Update total users count
-            let totalUsers = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('user_')) {
-                    totalUsers++;
+            if (dailyStats) {
+                dailyStats[statName] = (dailyStats[statName] || 0) + 1;
+                
+                let totalUsers = 0;
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('user_')) {
+                        totalUsers++;
+                    }
                 }
+                dailyStats.totalUsers = totalUsers;
+                
+                saveDailyStats();
             }
-            dailyStats.totalUsers = totalUsers;
-            
-            saveDailyStats();
         }
 
         function incrementZoneStat(zoneId) {
-            if (!dailyStats.zoneStats) {
-                dailyStats.zoneStats = {
-                    '9535867': 0,
-                    '9495003': 0,
-                    '9724593': 0
-                };
+            if (dailyStats && dailyStats.zoneStats) {
+                dailyStats.zoneStats[zoneId] = (dailyStats.zoneStats[zoneId] || 0) + 1;
+                saveDailyStats();
             }
-            dailyStats.zoneStats[zoneId] = (dailyStats.zoneStats[zoneId] || 0) + 1;
-            saveDailyStats();
         }
 
         // ==================== AUTO REPORT FUNCTION ====================
@@ -1095,11 +973,10 @@
             const timeStr = today.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
             const dateStr = today.toLocaleDateString('bn-BD');
 
-            // Calculate today's total
             let todayNewUsers = 0;
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
-                if (key.startsWith('user_')) {
+                if (key && key.startsWith('user_')) {
                     const user = JSON.parse(localStorage.getItem(key));
                     if (user.createdAt && user.createdAt.startsWith(today.toISOString().split('T')[0])) {
                         todayNewUsers++;
@@ -1107,10 +984,9 @@
                 }
             }
 
-            // Zone stats
-            const zone1Count = dailyStats.zoneStats?.['9730885'] || 0;
-            const zone2Count = dailyStats.zoneStats?.['9500387'] || 0;
-            const zone3Count = dailyStats.zoneStats?.['9715370'] || 0;
+            const zone1Count = dailyStats?.zoneStats?.['9730885'] || 0;
+            const zone2Count = dailyStats?.zoneStats?.['9500387'] || 0;
+            const zone3Count = dailyStats?.zoneStats?.['9715370'] || 0;
 
             const reportMessage = `
 📊 <b>স্মার্ট মানি প্রো - লাইভ রিপোর্ট</b>
@@ -1119,31 +995,30 @@
 ━━━━━━━━━━━━━━━━━━━
 
 👥 <b>ইউজার পরিসংখ্যান:</b>
-├ মোট ইউজার: ${dailyStats.totalUsers} জন
+├ মোট ইউজার: ${dailyStats?.totalUsers || 0} জন
 ├ আজকে জয়েন করেছেন: ${todayNewUsers} জন
-└ সক্রিয় ইউজার: ${Math.floor(dailyStats.totalUsers * 0.6)} জন
+└ সক্রিয় ইউজার: ${Math.floor((dailyStats?.totalUsers || 0) * 0.6)} জন
 
 📈 <b>আজকের অ্যাক্টিভিটি:</b>
-├ AdsGram এড দেখা: ${dailyStats.adsGramWatched}/১০ টি
-├ Monetag এড দেখা: ${dailyStats.monetagWatched}/৩০ টি
-│  ├ জোন ১ (9535867): ${zone1Count} টি
-│  ├ জোন ২ (9495003): ${zone2Count} টি
-│  └ জোন ৩ (9724593): ${zone3Count} টি
-├ ডেইলি জব সম্পন্ন: ${dailyStats.jobsCompleted} টি
-├ স্পন্সর জয়েন: ${dailyStats.sponsorsCompleted} টি
-└ মোট উইথড্র: ${dailyStats.totalWithdrawals} টি (${dailyStats.totalWithdrawalAmount} টাকা)
+├ AdsGram এড দেখা: ${dailyStats?.adsGramWatched || 0}/১০ টি
+├ Monetag এড দেখা: ${dailyStats?.monetagWatched || 0}/৩০ টি
+│  ├ জোন ১ (9730885): ${zone1Count} টি
+│  ├ জোন ২ (9500387): ${zone2Count} টি
+│  └ জোন ৩ (9715370): ${zone3Count} টি
+├ ডেইলি জব সম্পন্ন: ${dailyStats?.jobsCompleted || 0} টি
+├ স্পন্সর জয়েন: ${dailyStats?.sponsorsCompleted || 0} টি
+└ মোট উইথড্র: ${dailyStats?.totalWithdrawals || 0} টি (${dailyStats?.totalWithdrawalAmount || 0} টাকা)
 
 💰 <b>আর্থিক পরিসংখ্যান:</b>
-├ আজকের পেমেন্ট: ${dailyStats.totalWithdrawalAmount} টাকা
+├ আজকের পেমেন্ট: ${dailyStats?.totalWithdrawalAmount || 0} টাকা
 ├ মোট উপার্জন: ${calculateTotalEarnings()} টাকা
-└ স্পন্সর বোনাস: ${dailyStats.sponsorsCompleted * 20} টাকা
+└ স্পন্সর বোনাস: ${(dailyStats?.sponsorsCompleted || 0) * 20} টাকা
 
 ━━━━━━━━━━━━━━━━━━━
 🔔 পরবর্তী রিপোর্ট: ১ ঘন্টা পর
 🤖 <b>স্মার্ট মানি প্রো - আয়ের নতুন ঠিকানা</b>
             `;
 
-            // Send to channel using Telegram Bot API
             try {
                 const botToken = '7793213912:AAFvPB1DZ8nrkUzXpwZPeXxplw6BNrirPxs';
                 const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -1175,7 +1050,7 @@
             let total = 0;
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
-                if (key.startsWith('user_')) {
+                if (key && key.startsWith('user_')) {
                     const user = JSON.parse(localStorage.getItem(key));
                     total += user.balance || 0;
                 }
@@ -1183,12 +1058,8 @@
             return total;
         }
 
-        // Start auto report (every hour)
         function startAutoReport() {
-            // Send first report immediately
             setTimeout(() => sendReportToChannel(), 5000);
-            
-            // Then every hour
             setInterval(() => sendReportToChannel(), 60 * 60 * 1000);
         }
 
@@ -1196,19 +1067,14 @@
 
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram...');
-            console.log('AdsGram block ID:', CONFIG.adsgram.blockId);
             
             if (!CONFIG.adsgram.enabled) {
-                console.log('⚠️ AdsGram is disabled in config');
+                console.log('⚠️ AdsGram is disabled');
                 return;
             }
 
             try {
-                // Check if Adsgram is available
                 if (typeof window.Adsgram !== 'undefined' && window.Adsgram) {
-                    console.log('AdsGram found, initializing...');
-                    
-                    // Initialize AdController with block ID
                     AdController = window.Adsgram.init({ 
                         blockId: CONFIG.adsgram.blockId 
                     });
@@ -1216,13 +1082,14 @@
                     if (AdController) {
                         adsGramReady = true;
                         console.log('✅ AdsGram initialized successfully');
-                        document.getElementById('ad-claim-btn').disabled = false;
+                        const adBtn = document.getElementById('ad-claim-btn');
+                        if (adBtn) adBtn.disabled = false;
                     } else {
                         console.log('⚠️ AdController is null');
                         setTimeout(initializeAdsGram, 2000);
                     }
                 } else {
-                    console.log('⚠️ AdsGram not loaded yet, retrying in 2 seconds...');
+                    console.log('⚠️ AdsGram not loaded yet, retrying...');
                     setTimeout(initializeAdsGram, 2000);
                 }
             } catch (error) {
@@ -1233,7 +1100,7 @@
 
         async function claimAdsGramReward() {
             if (!adsGramReady) {
-                showAlert(" সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
+                showAlert("সিস্টেম প্রস্তুত হচ্ছে... কিছুক্ষণ পর আবার চেষ্টা করুন।");
                 return;
             }
 
@@ -1254,34 +1121,30 @@
                 const hours = Math.floor(timeUntilReset / (1000 * 60 * 60));
                 const minutes = Math.floor((timeUntilReset % (1000 * 60 * 60)) / (1000 * 60));
                 
-                return showAlert(`আজকের জন্য আপনার  অ্যাড দেখার সীমা শেষ হয়েছে (${adsGramCount}/10)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
+                return showAlert(`আজকের জন্য আপনার অ্যাড দেখার সীমা শেষ হয়েছে (${adsGramCount}/10)। আবার দেখতে পারবেন ${hours} ঘন্টা ${minutes} মিনিট পর।`);
             }
             
             isAdsGramShowing = true;
             const adClaimBtn = document.getElementById('ad-claim-btn');
-            adClaimBtn.classList.add('btn-loading');
-            adClaimBtn.textContent = ' অ্যাড চলছে...';
-            adClaimBtn.disabled = true;
+            if (adClaimBtn) {
+                adClaimBtn.classList.add('btn-loading');
+                adClaimBtn.textContent = 'অ্যাড চলছে...';
+                adClaimBtn.disabled = true;
+            }
             
             try {
                 showAlert("অ্যাড লোড হচ্ছে... দয়া করে অপেক্ষা করুন.");
                 
                 if (AdController) {
-                    console.log('Showing AdsGram ad...');
-                    
-                    // Show the ad
                     const result = await AdController.show();
+                    console.log('✅ Ad completed successfully:', result);
                     
-                    console.log('✅ad completed successfully:', result);
-                    
-                    // User watched the ad till the end
                     adsGramCount++;
                     
                     userData.adsGramCount = adsGramCount;
                     userData.lastAdsGramDate = today;
-                    userData.balance += CONFIG.app.adReward;
+                    userData.balance = (userData.balance || 0) + CONFIG.app.adReward;
                     
-                    // Update statistics
                     incrementStat('adsGramWatched');
                     
                     saveUserToStorage(userData);
@@ -1291,32 +1154,32 @@
                     updateUI();
                     updateAdCounts();
                 } else {
-                    throw new Error('not initialized properly');
+                    throw new Error('AdController not initialized properly');
                 }
                 
             } catch (error) {
-                console.error('❌ error:', error);
-                showAlert(" অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
+                console.error('❌ AdsGram error:', error);
+                showAlert("অ্যাড প্রদর্শনে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
             } finally {
                 isAdsGramShowing = false;
-                adClaimBtn.classList.remove('btn-loading');
-                adClaimBtn.textContent = 'ক্লেইম';
-                adClaimBtn.disabled = false;
+                if (adClaimBtn) {
+                    adClaimBtn.classList.remove('btn-loading');
+                    adClaimBtn.textContent = 'ক্লেইম';
+                    adClaimBtn.disabled = false;
+                }
             }
         }
 
         // ==================== MONETAG AD SYSTEM ====================
 
         function initializeMonetag() {
-            console.log('🔧 Initializing  Ad System...');
-            console.log('Monetag Zones:', CONFIG.monetag.zones);
+            console.log('🔧 Initializing Monetag Ad System...');
             
             if (!CONFIG.monetag.enabled) {
-                console.log('⚠️ Monetag is disabled in config');
+                console.log('⚠️ Monetag is disabled');
                 return;
             }
 
-            // Check if ad functions are available
             let availableZones = 0;
             CONFIG.monetag.zones.forEach(zone => {
                 const adFuncName = `show_${zone}`;
@@ -1330,13 +1193,12 @@
 
             if (availableZones > 0) {
                 monetagReady = true;
-                console.log(`✅  System Ready - ${availableZones}/3 zones available`);
-                document.getElementById('monetag-ad-btn').disabled = false;
-                
-                // Update zone status in admin panel
+                console.log(`✅ Monetag System Ready - ${availableZones}/3 zones available`);
+                const monetagBtn = document.getElementById('monetag-ad-btn');
+                if (monetagBtn) monetagBtn.disabled = false;
                 updateZoneStatus();
             } else {
-                console.log('⚠️ No zones ready, retrying in 3 seconds...');
+                console.log('⚠️ No zones ready, retrying...');
                 setTimeout(initializeMonetag, 3000);
             }
         }
@@ -1364,7 +1226,6 @@
                 todayAdsGram.textContent = `${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram}`;
             }
             
-            // Update zone indicator on home page
             const zoneIndicator = document.getElementById('zone-indicator');
             if (zoneIndicator) {
                 const zoneNumber = currentZoneIndex + 1;
@@ -1400,41 +1261,37 @@
             
             isMonetagShowing = true;
             const monetagBtn = document.getElementById('monetag-ad-btn');
-            monetagBtn.classList.add('btn-loading');
-            monetagBtn.textContent = 'অ্যাড চলছে...';
-            monetagBtn.disabled = true;
+            if (monetagBtn) {
+                monetagBtn.classList.add('btn-loading');
+                monetagBtn.textContent = 'অ্যাড চলছে...';
+                monetagBtn.disabled = true;
+            }
             
-            // Get current zone (rotate through 3 zones)
             const currentZone = CONFIG.monetag.zones[currentZoneIndex];
             const adFunction = `show_${currentZone}`;
             
-            // Update zone indicator
             const zoneIndicator = document.getElementById('zone-indicator');
             if (zoneIndicator) {
                 zoneIndicator.textContent = `Zone ${currentZoneIndex + 1}/3`;
             }
             
             try {
-                showAlert(` অ্যাড লোড হচ্ছে (Zone ${currentZoneIndex + 1}/3)... দয়া করে অপেক্ষা করুন।`);
+                showAlert(`অ্যাড লোড হচ্ছে (Zone ${currentZoneIndex + 1}/3)... দয়া করে অপেক্ষা করুন।`);
                 
                 if (typeof window[adFunction] === 'function') {
                     console.log(`Showing ad from zone: ${currentZone}`);
                     await window[adFunction]();
                     
-                    console.log(`✅ad from zone ${currentZone} completed successfully`);
+                    console.log(`✅ Ad from zone ${currentZone} completed successfully`);
                     
-                    // Increment counters
                     monetagCount++;
-                    
-                    // Update zone index for next ad (rotate through zones)
                     currentZoneIndex = (currentZoneIndex + 1) % CONFIG.monetag.zones.length;
                     
-                    // Update user data
                     userData.monetagCount = monetagCount;
                     userData.lastMonetagDate = today;
-                    userData.balance += CONFIG.app.adReward;
+                    userData.balance = (userData.balance || 0) + CONFIG.app.adReward;
+                    userData.currentZoneIndex = currentZoneIndex;
                     
-                    // Update statistics
                     incrementStat('monetagWatched');
                     incrementZoneStat(currentZone);
                     
@@ -1452,9 +1309,8 @@
                 }
                 
             } catch (error) {
-                console.error('❌  error:', error);
+                console.error('❌ Monetag error:', error);
                 
-                // Try fallback zones
                 let fallbackSuccess = false;
                 for (const zone of CONFIG.monetag.zones) {
                     if (zone !== currentZone) {
@@ -1467,14 +1323,14 @@
                                 monetagCount++;
                                 userData.monetagCount = monetagCount;
                                 userData.lastMonetagDate = today;
-                                userData.balance += CONFIG.app.adReward;
+                                userData.balance = (userData.balance || 0) + CONFIG.app.adReward;
                                 
                                 incrementStat('monetagWatched');
                                 incrementZoneStat(zone);
                                 
                                 saveUserToStorage(userData);
                                 
-                                showAlert(`🎉 অভিনন্দন!আ আপনি ${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
+                                showAlert(`🎉 অভিনন্দন! আপনি ৳${CONFIG.app.adReward} উপার্জন করেছেন। (${monetagCount}/${CONFIG.app.dailyAdLimit.monetag})`);
                                 
                                 updateUI();
                                 updateAdCounts();
@@ -1494,64 +1350,12 @@
                 }
             } finally {
                 isMonetagShowing = false;
-                monetagBtn.classList.remove('btn-loading');
-                monetagBtn.textContent = 'ক্লেইম';
-                monetagBtn.disabled = false;
-            }
-        }
-
-        // ==================== LOCAL STORAGE FUNCTIONS ====================
-
-        function loadUserFromStorage(userId) {
-            const storageKey = `user_${userId}`;
-            const storedData = localStorage.getItem(storageKey);
-            
-            if (storedData) {
-                try {
-                    return JSON.parse(storedData);
-                } catch (e) {
-                    console.error('Error parsing user data:', e);
-                    return null;
+                if (monetagBtn) {
+                    monetagBtn.classList.remove('btn-loading');
+                    monetagBtn.textContent = 'ক্লেইম';
+                    monetagBtn.disabled = false;
                 }
             }
-            return null;
-        }
-
-        function saveUserToStorage(userData) {
-            if (!currentUser) return;
-            const storageKey = `user_${currentUser.id}`;
-            localStorage.setItem(storageKey, JSON.stringify(userData));
-        }
-
-        function loadWithdrawalsFromStorage(userId) {
-            const storageKey = `withdrawals_${userId}`;
-            const stored = localStorage.getItem(storageKey);
-            return stored ? JSON.parse(stored) : [];
-        }
-
-        function saveWithdrawalToStorage(userId, withdrawal) {
-            const storageKey = `withdrawals_${userId}`;
-            const withdrawals = loadWithdrawalsFromStorage(userId);
-            withdrawals.push(withdrawal);
-            localStorage.setItem(storageKey, JSON.stringify(withdrawals));
-            
-            // Update statistics
-            dailyStats.totalWithdrawals++;
-            dailyStats.totalWithdrawalAmount += withdrawal.amount;
-            saveDailyStats();
-        }
-
-        function loadDailyJobsFromStorage(userId) {
-            const storageKey = `daily_jobs_${userId}`;
-            const stored = localStorage.getItem(storageKey);
-            return stored ? JSON.parse(stored) : [];
-        }
-
-        function saveDailyJobToStorage(userId, jobData) {
-            const storageKey = `daily_jobs_${userId}`;
-            const jobs = loadDailyJobsFromStorage(userId);
-            jobs.push(jobData);
-            localStorage.setItem(storageKey, JSON.stringify(jobs));
         }
 
         // ==================== CORE APPLICATION FUNCTIONS ====================
@@ -1565,70 +1369,81 @@
             
             if (savedTheme === 'dark') {
                 body.classList.add('dark-mode');
-                darkModeIcon.setAttribute('data-lucide', 'sun');
+                if (darkModeIcon) darkModeIcon.setAttribute('data-lucide', 'sun');
             } else {
                 body.classList.remove('dark-mode');
-                darkModeIcon.setAttribute('data-lucide', 'moon');
+                if (darkModeIcon) darkModeIcon.setAttribute('data-lucide', 'moon');
             }
             
             lucide.createIcons();
             
-            darkModeToggle.addEventListener('click', () => {
-                if (body.classList.contains('dark-mode')) {
-                    body.classList.remove('dark-mode');
-                    darkModeIcon.setAttribute('data-lucide', 'moon');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.classList.add('dark-mode');
-                    darkModeIcon.setAttribute('data-lucide', 'sun');
-                    localStorage.setItem('theme', 'dark');
-                }
-                
-                lucide.createIcons();
-            });
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', () => {
+                    if (body.classList.contains('dark-mode')) {
+                        body.classList.remove('dark-mode');
+                        if (darkModeIcon) darkModeIcon.setAttribute('data-lucide', 'moon');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-mode');
+                        if (darkModeIcon) darkModeIcon.setAttribute('data-lucide', 'sun');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    lucide.createIcons();
+                });
+            }
         }
 
         function initTelegramApp() {
-            tg.ready();
-            tg.expand();
-            
-            const user = tg.initDataUnsafe.user;
-            if (!user) {
-                showAlert("টেলিগ্রাম ইউজার ডেটা লোড করতে সমস্যা হয়েছে।");
-                return;
+            try {
+                tg.ready();
+                tg.expand();
+                
+                const user = tg.initDataUnsafe.user;
+                if (!user) {
+                    console.error("No Telegram user data found");
+                    showAlert("টেলিগ্রাম ইউজার ডেটা লোড করতে সমস্যা হয়েছে।");
+                    return;
+                }
+                
+                currentUser = {
+                    id: user.id.toString(),
+                    firstName: user.first_name || '',
+                    lastName: user.last_name || '',
+                    username: user.username || '',
+                    photoUrl: user.photo_url || '',
+                    languageCode: user.language_code || 'bn'
+                };
+                
+                console.log('✅ Telegram User loaded:', currentUser);
+                
+                loadUserData();
+                
+            } catch (error) {
+                console.error("Error initializing Telegram app:", error);
+                showAlert("টেলিগ্রাম অ্যাপ ইনিশিয়ালাইজ করতে সমস্যা হয়েছে।");
             }
-            
-            currentUser = {
-                id: user.id,
-                firstName: user.first_name,
-                lastName: user.last_name,
-                username: user.username,
-                photoUrl: user.photo_url,
-                languageCode: user.language_code
-            };
-            
-            console.log('Telegram User:', currentUser);
-            
-            loadUserData();
         }
 
         async function loadUserData() {
             const loader = document.getElementById('loader');
-            loader.style.display = 'flex';
+            if (loader) loader.style.display = 'flex';
             
             try {
-                userData = loadUserFromStorage(currentUser.id.toString());
+                userData = loadUserFromStorage(currentUser.id);
+                
+                const today = new Date().toISOString().split('T')[0];
                 
                 if (!userData) {
+                    console.log('Creating new user data...');
                     userData = {
-                        uid: currentUser.id.toString(),
-                        name: currentUser.firstName + (currentUser.lastName ? ' ' + currentUser.lastName : ''),
+                        uid: currentUser.id,
+                        name: (currentUser.firstName + (currentUser.lastName ? ' ' + currentUser.lastName : '')) || 'User',
                         username: currentUser.username || 'N/A',
                         balance: 0,
                         adsGramCount: 0,
                         monetagCount: 0,
-                        lastAdsGramDate: new Date().toISOString().split('T')[0],
-                        lastMonetagDate: new Date().toISOString().split('T')[0],
+                        lastAdsGramDate: today,
+                        lastMonetagDate: today,
                         isBlocked: false,
                         joinedVia: 'Telegram',
                         isVerified: false,
@@ -1637,20 +1452,18 @@
                         createdAt: new Date().toISOString()
                     };
                     
-                    // Increment new users count
                     incrementStat('newUsers');
-                    
                     saveUserToStorage(userData);
-                } else {
-                    const today = new Date().toISOString().split('T')[0];
+                    console.log('✅ New user created with balance: 0');
                     
-                    // Reset AdsGram count if new day
+                } else {
+                    console.log('✅ Existing user loaded:', userData);
+                    
                     if (userData.lastAdsGramDate !== today) {
                         userData.adsGramCount = 0;
                         userData.lastAdsGramDate = today;
                     }
                     
-                    // Reset Monetag count if new day
                     if (userData.lastMonetagDate !== today) {
                         userData.monetagCount = 0;
                         userData.lastMonetagDate = today;
@@ -1660,20 +1473,21 @@
                     adsGramCount = userData.adsGramCount || 0;
                     monetagCount = userData.monetagCount || 0;
                     currentZoneIndex = userData.currentZoneIndex || 0;
+                    
+                    saveUserToStorage(userData);
                 }
                 
                 updateUI();
                 checkAdminAccess();
                 navigateTo('home-page');
-                
                 updateJobButtonStates();
                 
-                loader.style.display = 'none';
+                if (loader) loader.style.display = 'none';
                 
             } catch (error) {
                 console.error("Error loading user data:", error);
                 showAlert("ইউজার ডেটা লোড করতে সমস্যা হয়েছে।");
-                loader.style.display = 'none';
+                if (loader) loader.style.display = 'none';
             }
         }
 
@@ -1681,39 +1495,53 @@
             if (!userData) return;
             
             const balance = userData.balance || 0;
-            document.getElementById('coin-balance').textContent = balance;
-            document.getElementById('wallet-coin-balance').textContent = balance;
-            document.getElementById('profile-name').textContent = userData.name || 'No Name';
-            document.getElementById('profile-username').textContent = '@' + (userData.username || 'username');
+            const balanceSpan = document.getElementById('coin-balance');
+            const walletBalanceSpan = document.getElementById('wallet-coin-balance');
+            const profileName = document.getElementById('profile-name');
+            const profileUsername = document.getElementById('profile-username');
+            const profilePhoto = document.getElementById('profile-photo');
+            const verifiedBadge = document.getElementById('verified-badge');
+            const verificationSection = document.getElementById('verification-section');
+            const minWithdrawalSpan = document.getElementById('min-withdrawal-info');
+            const joinedViaSpan = document.getElementById('joined-via');
+            const profileUserIdSpan = document.getElementById('profile-user-id');
             
-            if (currentUser.photoUrl) {
-                document.getElementById('profile-photo').src = currentUser.photoUrl;
-            }
+            if (balanceSpan) balanceSpan.textContent = balance;
+            if (walletBalanceSpan) walletBalanceSpan.textContent = balance;
+            if (profileName) profileName.textContent = userData.name || 'No Name';
+            if (profileUsername) profileUsername.textContent = '@' + (userData.username || 'username');
+            if (profilePhoto && currentUser.photoUrl) profilePhoto.src = currentUser.photoUrl;
             
             if (userData.isVerified) {
-                document.getElementById('verified-badge').classList.remove('hidden');
-                document.getElementById('verification-section').style.display = 'none';
+                if (verifiedBadge) verifiedBadge.classList.remove('hidden');
+                if (verificationSection) verificationSection.style.display = 'none';
             } else {
-                document.getElementById('verification-section').style.display = 'block';
+                if (verificationSection) verificationSection.style.display = 'block';
             }
             
-            document.getElementById('min-withdrawal-info').textContent = `${CONFIG.app.minWithdrawal}`;
+            if (minWithdrawalSpan) minWithdrawalSpan.textContent = CONFIG.app.minWithdrawal;
+            if (joinedViaSpan) joinedViaSpan.textContent = userData.joinedVia || 'Telegram';
+            if (profileUserIdSpan) profileUserIdSpan.textContent = currentUser.id;
             
             updateAdCounts();
-            
-            document.getElementById('joined-via').textContent = userData.joinedVia || 'Telegram';
-            document.getElementById('profile-user-id').textContent = currentUser.id;
         }
 
         function updateAdCounts() {
-            const adsLeft = Math.max(0, CONFIG.app.dailyAdLimit.adsgram - adsGramCount);
-            document.getElementById('ads-left-count').textContent = `${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram}`;
+            const adsLeftCount = document.getElementById('ads-left-count');
+            if (adsLeftCount) {
+                adsLeftCount.textContent = `${adsGramCount}/${CONFIG.app.dailyAdLimit.adsgram}`;
+            }
         }
 
         function navigateTo(pageId) {
-            document.querySelectorAll('.sub-page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(link => {
+            const subPages = document.querySelectorAll('.sub-page');
+            subPages.forEach(p => p.classList.remove('active'));
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) targetPage.classList.add('active');
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
                 link.classList.remove('active', 'text-accent');
                 if (link.dataset.page === pageId) link.classList.add('active', 'text-accent');
             });
@@ -1734,34 +1562,44 @@
         function showAlert(message) {
             const alert = document.getElementById('custom-alert');
             const messageEl = document.getElementById('alert-message');
-            messageEl.textContent = message;
-            alert.classList.remove('hidden');
-            document.getElementById('alert-ok-btn').onclick = () => alert.classList.add('hidden');
+            if (messageEl) messageEl.textContent = message;
+            if (alert) alert.classList.remove('hidden');
+            
+            const okBtn = document.getElementById('alert-ok-btn');
+            if (okBtn) {
+                okBtn.onclick = () => {
+                    if (alert) alert.classList.add('hidden');
+                };
+            }
         }
 
         // ==================== VERIFICATION SYSTEM ====================
 
         function setupVerificationButton() {
-            document.getElementById('verify-account-btn').addEventListener('click', handleVerification);
+            const verifyBtn = document.getElementById('verify-account-btn');
+            if (verifyBtn) {
+                verifyBtn.addEventListener('click', handleVerification);
+            }
         }
 
         async function handleVerification() {
-            window.open(CONFIG.social.verificationLink, '_blank');
+            tg.openLink(CONFIG.social.verificationLink);
             
             showAlert("ভেরিফিকেশন প্রসেস চলছে... ৫ সেকেন্ড পরে বোনাস যোগ করা হবে।");
             
             setTimeout(async () => {
                 try {
-                    userData.isVerified = true;
-                    userData.balance += CONFIG.app.joiningBonus;
-                    
-                    saveUserToStorage(userData);
-                    
-                    updateUI();
-                    showAlert(`🎉 আপনার অ্যাকাউন্ট ভেরিফাই করা হয়েছে! জয়েনিং বোনাস ৳${CONFIG.app.joiningBonus} টাকা পেয়েছেন।`);
-                    
-                    document.getElementById('verification-section').style.display = 'none';
-                    
+                    if (userData && !userData.isVerified) {
+                        userData.isVerified = true;
+                        userData.balance = (userData.balance || 0) + CONFIG.app.joiningBonus;
+                        
+                        saveUserToStorage(userData);
+                        updateUI();
+                        showAlert(`🎉 আপনার অ্যাকাউন্ট ভেরিফাই করা হয়েছে! জয়েনিং বোনাস ৳${CONFIG.app.joiningBonus} টাকা পেয়েছেন।`);
+                        
+                        const verificationSection = document.getElementById('verification-section');
+                        if (verificationSection) verificationSection.style.display = 'none';
+                    }
                 } catch (error) {
                     console.error("Error verifying account:", error);
                     showAlert("ভেরিফিকেশন প্রসেসে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।");
@@ -1773,16 +1611,14 @@
 
         function loadNotifications() {
             const listEl = document.getElementById('notifications-list');
+            if (!listEl) return;
             
             const notifications = [
-                
-                
                 {
                     title: "পেমেন্ট আপডেট!",
-                    message: "সকল ইউজার দের পেমেন্ট দেওয়া হয়েছে। উইথড্র রিকোয়েস্ট বেশি হওয়ায় মিনিমাম উইথড্র ১০০০ থেকে ২০০০ টাকা করা হয়েছে।সবাই কাজ করুন আর দ্রুত উইথড্র দেন!",
+                    message: "সকল ইউজারদের পেমেন্ট দেওয়া হয়েছে। উইথড্র রিকোয়েস্ট বেশি হওয়ায় মিনিমাম উইথড্র ২০০০ টাকা করা হয়েছে। সবাই কাজ করুন আর দ্রুত উইথড্র দিন!",
                     createdAt: new Date().toISOString()
-                }
-                
+                },
                 {
                     title: "স্বাগতম!",
                     message: "Smart Money Pro-তে আপনাকে স্বাগতম! টাস্ক সম্পন্ন করে টাকা উপার্জন শুরু করুন।",
@@ -1824,11 +1660,12 @@
 
         function loadWithdrawalHistory() {
             const historyList = document.getElementById('withdrawal-history-list');
+            if (!historyList) return;
             
-            const withdrawals = loadWithdrawalsFromStorage(currentUser.id.toString());
+            const withdrawals = loadWithdrawalsFromStorage(currentUser.id);
             
             if (withdrawals.length === 0) {
-                historyList.innerHTML = '<p class="text-gray-600">আপনি এখনো কোন উত্তোলন করেননি</p>';
+                historyList.innerHTML = '<p class="text-gray-600 text-center">আপনি এখনো কোন উত্তোলন করেননি</p>';
                 return;
             }
             
@@ -1855,9 +1692,13 @@
         }
 
         async function handleWithdrawal() {
-            const amount = parseInt(document.getElementById('withdraw-amount').value);
-            const method = document.getElementById('withdraw-method').value;
-            const paymentDetail = document.getElementById('payment-detail-input')?.value;
+            const amountInput = document.getElementById('withdraw-amount');
+            const methodSelect = document.getElementById('withdraw-method');
+            const paymentDetailInput = document.getElementById('payment-detail-input');
+            
+            const amount = amountInput ? parseInt(amountInput.value) : 0;
+            const method = methodSelect ? methodSelect.value : '';
+            const paymentDetail = paymentDetailInput ? paymentDetailInput.value : '';
             
             const minWithdrawal = CONFIG.app.minWithdrawal;
             
@@ -1883,7 +1724,7 @@
             
             try {
                 const withdrawalData = {
-                    userId: currentUser.id.toString(),
+                    userId: currentUser.id,
                     userName: userData.name,
                     amount: amount,
                     method: method,
@@ -1892,7 +1733,7 @@
                     requestedAt: new Date().toISOString()
                 };
                 
-                saveWithdrawalToStorage(currentUser.id.toString(), withdrawalData);
+                saveWithdrawalToStorage(currentUser.id, withdrawalData);
                 
                 userData.balance -= amount;
                 saveUserToStorage(userData);
@@ -1901,9 +1742,14 @@
                 
                 showAlert("আপনার উত্তোলন রিকোয়েস্ট জমা হয়েছে। ২৪-৪৮ ঘন্টার মধ্যে প্রোসেস করা হবে।");
                 
-                document.getElementById('withdraw-amount').value = '';
-                document.getElementById('withdraw-method').value = '';
-                document.getElementById('payment-details-container').innerHTML = '';
+                if (amountInput) amountInput.value = '';
+                if (methodSelect) methodSelect.value = '';
+                
+                const paymentContainer = document.getElementById('payment-details-container');
+                if (paymentContainer) paymentContainer.innerHTML = '';
+                
+                loadWithdrawalHistory();
+                
             } catch (error) {
                 console.error("Error processing withdrawal:", error);
                 showAlert("উত্তোলন রিকোয়েস্ট করতে সমস্যা হয়েছে।");
@@ -1911,13 +1757,20 @@
         }
 
         function updateDynamicPaymentFields() {
-            const selectedMethod = document.getElementById('withdraw-method').value.toLowerCase();
+            const methodSelect = document.getElementById('withdraw-method');
+            const paymentContainer = document.getElementById('payment-details-container');
+            
+            if (!methodSelect || !paymentContainer) return;
+            
+            const selectedMethod = methodSelect.value.toLowerCase();
             let placeholder = "বিবরণ লিখুন";
+            
             if (selectedMethod.includes('bkash')) placeholder = "আপনার বিকাশ নম্বর লিখুন";
-            if (selectedMethod.includes('nagad')) placeholder = "আপনার নগদ নম্বর লিখুন";
-            if (selectedMethod.includes('rocket')) placeholder = "আপনার রকেট নম্বর লিখুন";
-            if (selectedMethod.includes('bank')) placeholder = "আপনার ব্যাংক অ্যাকাউন্ট বিবরণ লিখুন";
-            document.getElementById('payment-details-container').innerHTML = `<input id="payment-detail-input" type="text" placeholder="${placeholder}" class="w-full p-3 rounded-lg input-field">`;
+            else if (selectedMethod.includes('nagad')) placeholder = "আপনার নগদ নম্বর লিখুন";
+            else if (selectedMethod.includes('rocket')) placeholder = "আপনার রকেট নম্বর লিখুন";
+            else if (selectedMethod.includes('bank')) placeholder = "আপনার ব্যাংক অ্যাকাউন্ট বিবরণ লিখুন";
+            
+            paymentContainer.innerHTML = `<input id="payment-detail-input" type="text" placeholder="${placeholder}" class="w-full p-3 rounded-lg input-field">`;
         }
 
         // ==================== DAILY JOBS SYSTEM ====================
@@ -1940,27 +1793,33 @@
                             <p class="text-gray-600 text-sm">৳10 আর্ন করুন</p>
                         </div>
                     </div>
-                    <button id="job-btn-${i}" onclick="handleJobClick(${i}, '${jobLink}')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    <button id="job-btn-${i}" data-job-id="${i}" data-job-link="${jobLink}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
                         শুরু করুন
                     </button>
                 `;
-                jobDiv.querySelector('button').setAttribute('data-job-link', jobLink);
                 jobsContainer.appendChild(jobDiv);
             }
             
             updateJobButtonStates();
+            
+            // Attach event listeners to job buttons
+            for (let i = 1; i <= 20; i++) {
+                const btn = document.getElementById(`job-btn-${i}`);
+                if (btn) {
+                    btn.addEventListener('click', () => handleJobClick(i, btn.getAttribute('data-job-link')));
+                }
+            }
         }
 
         async function updateJobButtonStates() {
             if (!currentUser) return;
             
-            const completedJobs = loadDailyJobsFromStorage(currentUser.id.toString());
+            const completedJobs = loadDailyJobsFromStorage(currentUser.id);
             const jobCompletions = {};
             
             completedJobs.forEach(job => {
                 const jobId = job.jobId;
                 const completedAt = new Date(job.completedAt);
-                
                 if (!jobCompletions[jobId] || completedAt > jobCompletions[jobId]) {
                     jobCompletions[jobId] = completedAt;
                 }
@@ -1984,22 +1843,22 @@
                         button.textContent = `${hours}ঘ ${minutes}মি`;
                         button.className = 'bg-red-600 text-white px-4 py-2 rounded-lg font-medium cursor-not-allowed';
                         button.disabled = true;
-                        button.onclick = null;
                     } else {
                         button.textContent = 'শুরু করুন';
                         button.className = 'bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors';
                         button.disabled = false;
-                        const jobLink = button.getAttribute('data-job-link') || '#';
-                        button.onclick = () => handleJobClick(i, jobLink);
                     }
                 }
             }
         }
 
-        window.handleJobClick = async function(jobId, jobLink) {
-            if (!currentUser) return showAlert("লগইন করুন।");
+        async function handleJobClick(jobId, jobLink) {
+            if (!currentUser) {
+                showAlert("লগইন করুন।");
+                return;
+            }
             
-            const completedJobs = loadDailyJobsFromStorage(currentUser.id.toString());
+            const completedJobs = loadDailyJobsFromStorage(currentUser.id);
             const userJobs = completedJobs.filter(job => job.jobId === jobId);
             
             let lastCompleted = null;
@@ -2043,14 +1902,14 @@
                     currentJobTracking = null;
                 }
             }, 15000);
-        };
+        }
 
         async function completeJobAfterValidation(jobId) {
             try {
                 const jobReward = CONFIG.app.dailyJobReward;
                 
                 const jobData = {
-                    userId: currentUser.id.toString(),
+                    userId: currentUser.id,
                     userName: userData.name || 'Unknown',
                     jobId: jobId,
                     completedAt: new Date().toISOString(),
@@ -2058,18 +1917,18 @@
                     userAgent: navigator.userAgent
                 };
                 
-                saveDailyJobToStorage(currentUser.id.toString(), jobData);
+                saveDailyJobToStorage(currentUser.id, jobData);
                 
-                userData.balance += jobReward;
+                userData.balance = (userData.balance || 0) + jobReward;
                 saveUserToStorage(userData);
                 
-                // Update statistics
                 incrementStat('jobsCompleted');
                 
                 updateUI();
                 showAlert(`🎉 সফল! ৳${jobReward} আপনার অ্যাকাউন্টে যোগ হয়েছে।`);
                 
                 updateJobButtonStates();
+                
             } catch (error) {
                 console.error("Error completing job:", error);
                 showAlert("কাজ সম্পন্ন করতে সমস্যা হয়েছে।");
@@ -2094,20 +1953,184 @@
             }
         });
 
+        // ==================== SPONSOR SYSTEM ====================
+
+        function loadSponsorButtons() {
+            const container = document.getElementById('sponsor-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 5; i++) {
+                const sponsor = CONFIG.sponsorButtons[`sponsor${i}`];
+                if (!sponsor) continue;
+                
+                const sponsorStatus = getSponsorStatus(i);
+                const isCompleted = sponsorStatus.completed;
+                const cooldownTime = sponsorStatus.cooldownTime;
+                
+                const sponsorCard = document.createElement('div');
+                sponsorCard.className = `sponsor-card ${isCompleted ? 'completed' : ''}`;
+                sponsorCard.id = `sponsor-${i}`;
+                
+                let buttonText = isCompleted ? 'সম্পন্ন হয়েছে' : 'এখনই জয়েন করুন';
+                let buttonDisabled = isCompleted;
+                
+                if (cooldownTime > 0 && !isCompleted) {
+                    const hours = Math.floor(cooldownTime / (60 * 60 * 1000));
+                    const minutes = Math.floor((cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
+                    buttonText = `${hours}ঘ ${minutes}মি পর`;
+                    buttonDisabled = true;
+                }
+                
+                sponsorCard.innerHTML = `
+                    <div class="sponsor-card-header">
+                        <div class="sponsor-icon">
+                            <i class="${sponsor.icon}"></i>
+                        </div>
+                        <div class="sponsor-title">${sponsor.name}</div>
+                    </div>
+                    <div class="sponsor-reward">
+                        <i class="fas fa-coins"></i> +${sponsor.reward} টাকা বোনাস
+                    </div>
+                    <button class="sponsor-btn" onclick="handleSponsorClick(${i})" ${buttonDisabled ? 'disabled' : ''}>
+                        ${buttonText}
+                    </button>
+                `;
+                
+                container.appendChild(sponsorCard);
+            }
+            
+            setTimeout(updateSponsorTimers, 60000);
+        }
+
+        function getSponsorStatus(sponsorId) {
+            if (!currentUser) return { completed: false, cooldownTime: 0 };
+            
+            const sponsorKey = `sponsor_${currentUser.id}_${sponsorId}`;
+            const sponsorData = localStorage.getItem(sponsorKey);
+            
+            if (!sponsorData) {
+                return { completed: false, cooldownTime: 0 };
+            }
+            
+            try {
+                const data = JSON.parse(sponsorData);
+                const now = new Date().getTime();
+                const completedAt = new Date(data.completedAt).getTime();
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+                const timeElapsed = now - completedAt;
+                
+                if (timeElapsed < twentyFourHours) {
+                    const cooldownTime = twentyFourHours - timeElapsed;
+                    return { completed: true, cooldownTime: cooldownTime };
+                } else {
+                    localStorage.removeItem(sponsorKey);
+                    return { completed: false, cooldownTime: 0 };
+                }
+            } catch (e) {
+                return { completed: false, cooldownTime: 0 };
+            }
+        }
+
+        function updateSponsorTimers() {
+            if (!currentUser) return;
+            
+            for (let i = 1; i <= 5; i++) {
+                const sponsorCard = document.getElementById(`sponsor-${i}`);
+                if (!sponsorCard) continue;
+                
+                const sponsorStatus = getSponsorStatus(i);
+                const button = sponsorCard.querySelector('button');
+                
+                if (sponsorStatus.cooldownTime > 0 && !sponsorStatus.completed) {
+                    const hours = Math.floor(sponsorStatus.cooldownTime / (60 * 60 * 1000));
+                    const minutes = Math.floor((sponsorStatus.cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
+                    if (button) {
+                        button.textContent = `${hours}ঘ ${minutes}মি পর`;
+                        button.disabled = true;
+                    }
+                    sponsorCard.classList.remove('completed');
+                } else if (sponsorStatus.cooldownTime === 0 && !sponsorStatus.completed) {
+                    if (button) {
+                        button.textContent = 'এখনই জয়েন করুন';
+                        button.disabled = false;
+                    }
+                    sponsorCard.classList.remove('completed');
+                } else if (sponsorStatus.completed && sponsorStatus.cooldownTime > 0) {
+                    if (button) {
+                        button.textContent = 'সম্পন্ন হয়েছে';
+                        button.disabled = true;
+                    }
+                    sponsorCard.classList.add('completed');
+                }
+            }
+        }
+
+        window.handleSponsorClick = async function(sponsorId) {
+            if (!currentUser) {
+                showAlert("লগইন করুন।");
+                return;
+            }
+            
+            const sponsorStatus = getSponsorStatus(sponsorId);
+            
+            if (sponsorStatus.completed && sponsorStatus.cooldownTime > 0) {
+                const hours = Math.floor(sponsorStatus.cooldownTime / (60 * 60 * 1000));
+                const minutes = Math.floor((sponsorStatus.cooldownTime % (60 * 60 * 1000)) / (60 * 1000));
+                showAlert(`আপনি ইতিমধ্যে এই স্পন্সরে জয়েন করেছেন। আবার জয়েন করতে ${hours} ঘন্টা ${minutes} মিনিট অপেক্ষা করুন।`);
+                return;
+            }
+            
+            const sponsor = CONFIG.sponsorButtons[`sponsor${sponsorId}`];
+            if (!sponsor) return;
+            
+            tg.openLink(sponsor.link);
+            
+            showAlert("স্পন্সরে জয়েন করার জন্য অপেক্ষা করুন... ৫ সেকেন্ড পর বোনাস যোগ হবে।");
+            
+            setTimeout(async () => {
+                try {
+                    const sponsorKey = `sponsor_${currentUser.id}_${sponsorId}`;
+                    const sponsorData = {
+                        completedAt: new Date().toISOString(),
+                        sponsorId: sponsorId
+                    };
+                    localStorage.setItem(sponsorKey, JSON.stringify(sponsorData));
+                    
+                    const bonus = CONFIG.app.sponsorBonus || 20;
+                    userData.balance = (userData.balance || 0) + bonus;
+                    
+                    incrementStat('sponsorsCompleted');
+                    
+                    saveUserToStorage(userData);
+                    updateUI();
+                    updateSponsorTimers();
+                    
+                    showAlert(`🎉 স্পন্সরে জয়েন করার জন্য ৳${bonus} বোনাস পেয়েছেন! আবার জয়েন করতে পারবেন ২৪ ঘন্টা পর।`);
+                    
+                } catch (error) {
+                    console.error("Error processing sponsor bonus:", error);
+                    showAlert("বোনাস প্রদানে সমস্যা হয়েছে।");
+                }
+            }, 5000);
+        };
+
         // ==================== ADMIN SYSTEM ====================
 
         function checkAdminAccess() {
             const adminUserIds = [CONFIG.bot.adminChatId];
             const adminAccess = document.getElementById('admin-access');
-            if (adminUserIds.includes(currentUser?.id.toString())) {
-                adminAccess.classList.remove('hidden');
+            if (adminUserIds.includes(currentUser?.id)) {
+                if (adminAccess) adminAccess.classList.remove('hidden');
             } else {
-                adminAccess.classList.add('hidden');
+                if (adminAccess) adminAccess.classList.add('hidden');
             }
         }
 
         async function sendBonusToAllUsers() {
-            const bonusAmount = parseInt(document.getElementById('bonus-amount').value);
+            const bonusAmountInput = document.getElementById('bonus-amount');
+            const bonusAmount = bonusAmountInput ? parseInt(bonusAmountInput.value) : 0;
             
             if (!bonusAmount || bonusAmount <= 0) {
                 showAlert("বোনাসের পরিমাণ সঠিকভাবে লিখুন");
@@ -2124,10 +2147,10 @@
                 const allUsers = [];
                 for (let i = 0; i < localStorage.length; i++) {
                     const key = localStorage.key(i);
-                    if (key.startsWith('user_')) {
+                    if (key && key.startsWith('user_')) {
                         try {
                             const userData = JSON.parse(localStorage.getItem(key));
-                            allUsers.push(userData);
+                            if (userData) allUsers.push(userData);
                         } catch (e) {
                             console.error('Error parsing user data:', e);
                         }
@@ -2140,7 +2163,6 @@
                 for (const user of allUsers) {
                     user.balance = (user.balance || 0) + bonusAmount;
                     localStorage.setItem(`user_${user.uid}`, JSON.stringify(user));
-                    
                     processed++;
                     
                     if (processed % 10 === 0) {
@@ -2149,10 +2171,10 @@
                 }
                 
                 showAlert(`🎉 সফল! সকল ${totalUsers} ইউজারকে ৳${bonusAmount} করে বোনাস দেওয়া হয়েছে।`);
-                document.getElementById('bonus-amount').value = '';
+                if (bonusAmountInput) bonusAmountInput.value = '';
                 
                 if (userData) {
-                    const updatedUser = loadUserFromStorage(currentUser.id.toString());
+                    const updatedUser = loadUserFromStorage(currentUser.id);
                     if (updatedUser) {
                         userData = updatedUser;
                         updateUI();
@@ -2165,12 +2187,6 @@
             }
         }
 
-        // Manual report button
-        document.getElementById('send-manual-report')?.addEventListener('click', function() {
-            sendReportToChannel();
-            showAlert("রিপোর্ট পাঠানো হচ্ছে... চ্যানেল চেক করুন।");
-        });
-
         function updateCooldownTimers() {
             updateJobButtonStates();
             setInterval(updateJobButtonStates, 60000);
@@ -2179,7 +2195,8 @@
         // ==================== EVENT LISTENERS ====================
 
         function setupEventListeners() {
-            document.querySelectorAll('.nav-link').forEach(link => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const pageId = link.dataset.page;
@@ -2187,22 +2204,46 @@
                 });
             });
             
-            // AdsGram button
-            document.getElementById('ad-claim-btn').addEventListener('click', claimAdsGramReward);
+            const adClaimBtn = document.getElementById('ad-claim-btn');
+            if (adClaimBtn) adClaimBtn.addEventListener('click', claimAdsGramReward);
             
-            // Monetag button
-            document.getElementById('monetag-ad-btn').addEventListener('click', claimMonetagReward);
+            const monetagAdBtn = document.getElementById('monetag-ad-btn');
+            if (monetagAdBtn) monetagAdBtn.addEventListener('click', claimMonetagReward);
             
-            document.getElementById('notification-bell').addEventListener('click', () => { navigateTo('notifications-page'); loadNotifications(); });
-            document.getElementById('withdraw-btn').addEventListener('click', handleWithdrawal);
-            document.getElementById('home-withdraw-btn').addEventListener('click', () => navigateTo('wallet-page'));
-            document.getElementById('withdraw-method').addEventListener('change', updateDynamicPaymentFields);
+            const notificationBell = document.getElementById('notification-bell');
+            if (notificationBell) {
+                notificationBell.addEventListener('click', () => { 
+                    navigateTo('notifications-page'); 
+                    loadNotifications(); 
+                });
+            }
             
-            document.getElementById('telegram-channel-btn').addEventListener('click', () => {
-                window.open(CONFIG.social.telegram, '_blank');
-            });
+            const withdrawBtn = document.getElementById('withdraw-btn');
+            if (withdrawBtn) withdrawBtn.addEventListener('click', handleWithdrawal);
             
-            document.getElementById('send-bonus-btn').addEventListener('click', sendBonusToAllUsers);
+            const homeWithdrawBtn = document.getElementById('home-withdraw-btn');
+            if (homeWithdrawBtn) homeWithdrawBtn.addEventListener('click', () => navigateTo('wallet-page'));
+            
+            const withdrawMethod = document.getElementById('withdraw-method');
+            if (withdrawMethod) withdrawMethod.addEventListener('change', updateDynamicPaymentFields);
+            
+            const telegramChannelBtn = document.getElementById('telegram-channel-btn');
+            if (telegramChannelBtn) {
+                telegramChannelBtn.addEventListener('click', () => {
+                    tg.openLink(CONFIG.social.telegram);
+                });
+            }
+            
+            const sendBonusBtn = document.getElementById('send-bonus-btn');
+            if (sendBonusBtn) sendBonusBtn.addEventListener('click', sendBonusToAllUsers);
+            
+            const sendManualReport = document.getElementById('send-manual-report');
+            if (sendManualReport) {
+                sendManualReport.addEventListener('click', function() {
+                    sendReportToChannel();
+                    showAlert("রিপোর্ট পাঠানো হচ্ছে... চ্যানেল চেক করুন।");
+                });
+            }
             
             setupDailyJobs();
             setupVerificationButton();
@@ -2217,27 +2258,21 @@
             initTelegramApp();
             loadDailyStats();
             
-            // Initialize AdsGram
             setTimeout(initializeAdsGram, 500);
-            
-            // Initialize Monetag
             setTimeout(initializeMonetag, 1000);
             
-            // Start cooldown timers
             updateCooldownTimers();
             
-            // Start auto report
             if (CONFIG.bot.reportChannelId) {
                 startAutoReport();
             }
-            
-            // Load sponsor buttons
-            loadSponsorButtons();
         };
 
         window.navigateTo = navigateTo;
         window.showAlert = showAlert;
         window.openSupportPage = openSupportPage;
+        window.handleSponsorClick = handleSponsorClick;
+        window.handleJobClick = handleJobClick;
 
     </script>
 </body>
