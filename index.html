@@ -3,16 +3,13 @@
 <head>
 
 
-<script>
+
+        <script>
     (function() {
-        // Block ID (আপনার প্রদত্ত আইডি)
         const BLOCK_ID = "int-25167";
-        
-        // অ্যাড কন্ট্রোলার ইনিশিয়ালাইজ
         let adController = null;
         let adShown = false;
         
-        // অ্যাড দেখানোর ফাংশন
         function showAd() {
             if (adShown) return;
             if (!adController) {
@@ -26,19 +23,15 @@
             adShown = true;
             adController.show()
                 .then(() => {
-                    // ইউজার অ্যাড দেখে রিওয়ার্ড পাবে
-                    alert("✅ রিওয়ার্ড মিলেছে! ধন্যবাদ");
+                    alert("রিওয়ার্ড যোগ হয়েছে");
                 })
                 .catch((err) => {
                     console.error("Ad error:", err);
-                    alert("⚠️ অ্যাড লোড করতে সমস্যা হয়েছে");
                     adShown = false;
                 });
         }
         
-        // ১ সেকেন্ড স্থায়ী পপআপ মেসেজ দেখাবে, তারপর অ্যাড
         function showPopupAndAd() {
-            // পপআপ স্টাইল (ডায়নামিক এলিমেন্ট)
             const popup = document.createElement('div');
             popup.innerText = '⚠️ আপনাকে ১০ সেকেন্ডের একটি অ্যাড দেখানো হবে ⚠️';
             popup.style.position = 'fixed';
@@ -59,15 +52,12 @@
             popup.style.border = '1px solid rgba(255,255,255,0.2)';
             document.body.appendChild(popup);
             
-            // ১ সেকেন্ড পর পপআপ সরিয়ে অ্যাড দেখানো শুরু
             setTimeout(() => {
                 if (popup && popup.remove) popup.remove();
-                // অ্যাড দেখান
                 showAd();
-            }, 1000);
+            }, 2000);
         }
         
-        // পেজ লোড হওয়ার ৫ সেকেন্ড পর প্রক্রিয়া শুরু
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(showPopupAndAd, 5000);
@@ -76,7 +66,8 @@
             setTimeout(showPopupAndAd, 5000);
         }
     })();
-</script>
+        </script>
+
 
 
     
