@@ -8,7 +8,7 @@
     <!-- Telegram WebApp -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <!-- AdsGram Ad Script - জোন আইডি: task-27659 (Corrected) -->
+    <!-- AdsGram Ad Script - জোন আইডি: int-25167 -->
     <script src="https://cdn.adsgram.ai/js/adsgram.js"></script>
     
     <!-- Monetag Ad Zones -->
@@ -52,11 +52,6 @@
             transition: all 0.2s ease;
         }
         .btn-accent:active { transform: scale(0.96); }
-        .btn-outline-accent { 
-            border: 2px solid #ff8c00; 
-            color: #ff8c00; 
-            font-weight: bold;
-        }
         .input-field { 
             background-color: #f1f5f9; 
             border: 1px solid #e2e8f0; 
@@ -136,6 +131,7 @@
             padding: 18px;
             color: white;
             transition: all 0.3s ease;
+            position: relative;
         }
         .sponsor-card.completed {
             background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -155,7 +151,6 @@
             justify-content: center;
             font-weight: bold;
         }
-        .sponsor-card { position: relative; }
         .sponsor-btn {
             background: white;
             color: #667eea;
@@ -174,30 +169,21 @@
             font-size: 10px;
             margin-left: 8px;
         }
-        .btn-loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        .job-btn {
-            transition: all 0.2s ease;
-        }
+        .job-btn { transition: all 0.2s ease; }
         .job-btn:active { transform: scale(0.96); }
     </style>
 </head>
 <body class="max-w-md mx-auto">
 
-    <!-- Loader -->
     <div id="loader" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
         <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
     </div>
 
-    <!-- Main Container -->
     <div id="app-container" class="min-h-screen flex flex-col main-page active">
-        <!-- Header -->
-        <header class="flex items-center justify-between p-4 sticky top-0 z-10 bg-white/90 backdrop-blur-md dark-bg border-b border-gray-200">
+        <header class="flex items-center justify-between p-4 sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-gray-200">
             <h1 class="text-xl font-bold text-slate-800">💰 Smart Money Pro</h1>
             <div class="flex items-center gap-4">
-                <button id="dark-mode-toggle" class="dark-mode-toggle bg-transparent border-none">
+                <button id="dark-mode-toggle" class="bg-transparent border-none">
                     <i id="dark-mode-icon" data-lucide="moon" class="w-5 h-5"></i>
                 </button>
                 <div id="notification-bell" class="relative cursor-pointer">
@@ -209,9 +195,7 @@
         </header>
 
         <main class="flex-1">
-            <!-- Home Page -->
             <div id="home-page" class="p-4 space-y-5 sub-page active">
-                <!-- Balance Card -->
                 <div class="card-bg p-5 rounded-2xl flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">আপনার ব্যালেন্স</p>
@@ -220,7 +204,6 @@
                     <button id="home-withdraw-btn" class="bg-orange-500 text-white font-semibold px-5 py-2 rounded-xl">উইথড্র</button>
                 </div>
 
-                <!-- Verification Section -->
                 <div id="verification-section" class="bg-gradient-to-r from-green-500 to-green-600 p-4 rounded-2xl text-white">
                     <div class="flex justify-between items-center mb-2">
                         <h3 class="font-bold">✅ অ্যাকাউন্ট ভেরিফাই করুন</h3>
@@ -232,7 +215,6 @@
                     </button>
                 </div>
 
-                <!-- Tasks Section -->
                 <section>
                     <div class="flex justify-between items-center mb-3">
                         <div>
@@ -243,7 +225,6 @@
                     </div>
                     
                     <div class="space-y-3">
-                        <!-- AdsGram Ad Button -->
                         <div class="bg-gradient-to-r from-orange-500 to-red-500 p-4 rounded-xl text-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
@@ -253,13 +234,10 @@
                                         <p class="text-xs">AdsGram - ৳10 আয় করুন</p>
                                     </div>
                                 </div>
-                                <button id="ad-claim-btn" class="bg-white text-orange-600 font-bold px-5 py-2 rounded-xl text-sm">
-                                    দেখুন
-                                </button>
+                                <button id="ad-claim-btn" class="bg-white text-orange-600 font-bold px-5 py-2 rounded-xl text-sm">দেখুন</button>
                             </div>
                         </div>
                         
-                        <!-- Monetag Ad Button -->
                         <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-4 rounded-xl text-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
@@ -269,13 +247,10 @@
                                         <p class="text-xs">Monetag - ৳10 আয় করুন <span class="ad-zone-badge" id="zone-indicator">Zone 1/3</span></p>
                                     </div>
                                 </div>
-                                <button id="monetag-ad-btn" class="bg-white text-purple-600 font-bold px-5 py-2 rounded-xl text-sm">
-                                    দেখুন
-                                </button>
+                                <button id="monetag-ad-btn" class="bg-white text-purple-600 font-bold px-5 py-2 rounded-xl text-sm">দেখুন</button>
                             </div>
                         </div>
                         
-                        <!-- Daily Jobs -->
                         <div class="bg-gradient-to-r from-blue-600 to-cyan-600 p-4 rounded-xl text-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
@@ -289,7 +264,6 @@
                             </div>
                         </div>
                         
-                        <!-- Sponsor Page -->
                         <div class="bg-gradient-to-r from-pink-600 to-rose-600 p-4 rounded-xl text-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
@@ -303,7 +277,6 @@
                             </div>
                         </div>
                         
-                        <!-- Telegram Channel -->
                         <div class="bg-gradient-to-r from-sky-500 to-blue-700 p-4 rounded-xl text-white social-button">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
@@ -313,16 +286,13 @@
                                         <p class="text-xs">সব আপডেট পেতে জয়েন করুন</p>
                                     </div>
                                 </div>
-                                <button id="telegram-channel-btn" class="bg-white text-blue-600 font-bold px-5 py-2 rounded-xl text-sm">
-                                    জয়েন
-                                </button>
+                                <button id="telegram-channel-btn" class="bg-white text-blue-600 font-bold px-5 py-2 rounded-xl text-sm">জয়েন</button>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
 
-            <!-- Sponsor Page -->
             <div id="sponsor-page" class="p-4 space-y-4 sub-page">
                 <div class="flex items-center gap-3 mb-4">
                     <button onclick="navigateTo('home-page')" class="text-gray-600"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
@@ -338,7 +308,6 @@
                 </div>
             </div>
 
-            <!-- Wallet Page -->
             <div id="wallet-page" class="p-4 space-y-5 sub-page">
                 <h2 class="text-xl font-bold text-center text-slate-800">💰 আমার ওয়ালেট</h2>
                 <div class="card-bg p-5 rounded-2xl">
@@ -361,7 +330,6 @@
                 </div>
             </div>
 
-            <!-- Profile Page -->
             <div id="profile-page" class="p-4 space-y-5 sub-page">
                 <h2 class="text-xl font-bold text-center text-slate-800">প্রোফাইল</h2>
                 <div class="flex flex-col items-center">
@@ -382,13 +350,11 @@
                 </div>
             </div>
             
-            <!-- Notifications Page -->
             <div id="notifications-page" class="p-4 space-y-4 sub-page">
                 <h2 class="text-xl font-bold text-center text-slate-800">📬 ইনবক্স</h2>
                 <div id="notifications-list" class="space-y-3"></div>
             </div>
 
-            <!-- Daily Jobs Page -->
             <div id="daily-jobs-page" class="p-4 space-y-4 sub-page">
                 <div class="flex items-center gap-3 mb-4">
                     <button onclick="navigateTo('home-page')" class="text-gray-600"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
@@ -404,7 +370,6 @@
                 <div id="daily-jobs-container" class="space-y-3"></div>
             </div>
 
-            <!-- Admin Panel -->
             <div id="admin-panel" class="p-4 space-y-5 sub-page">
                 <div class="flex items-center gap-3 mb-4">
                     <button onclick="navigateTo('profile-page')" class="text-gray-600"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
@@ -418,7 +383,7 @@
                 <div class="card-bg p-4 rounded-2xl">
                     <h3 class="font-bold mb-3">জোন স্ট্যাটাস</h3>
                     <div id="zone-stats" class="space-y-1 text-sm">
-                        <div class="flex justify-between"><span>AdsGram (task-27659):</span><span id="adsgram-status">✅ Active</span></div>
+                        <div class="flex justify-between"><span>AdsGram (int-25167):</span><span id="adsgram-status">⏳ লোডিং...</span></div>
                         <div class="flex justify-between"><span>জোন 9730885:</span><span id="zone1-status">⏳</span></div>
                         <div class="flex justify-between"><span>জোন 9500387:</span><span id="zone2-status">⏳</span></div>
                         <div class="flex justify-between"><span>জোন 9715370:</span><span id="zone3-status">⏳</span></div>
@@ -428,7 +393,6 @@
             </div>
         </main>
 
-        <!-- Bottom Navigation -->
         <nav class="bottom-nav fixed bottom-0 left-0 right-0 max-w-md mx-auto grid grid-cols-4 items-center py-2 card-bg border-t border-gray-200">
             <a href="#" class="nav-link active flex flex-col items-center" data-page="home-page"><i data-lucide="home" class="w-5 h-5"></i><span class="text-xs">হোম</span></a>
             <a href="#" class="nav-link flex flex-col items-center" data-page="wallet-page"><i data-lucide="wallet" class="w-5 h-5"></i><span class="text-xs">ওয়ালেট</span></a>
@@ -437,12 +401,10 @@
         </nav>
     </div>
     
-    <!-- Support Button -->
     <div class="support-btn" onclick="openSupportPage()">
         <i class="fas fa-headset"></i>
     </div>
 
-    <!-- Custom Alert -->
     <div id="custom-alert" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-sm text-center">
             <p id="alert-message" class="mb-4 text-slate-800 dark:text-white"></p>
@@ -451,7 +413,6 @@
     </div>
 
     <script>
-        // ==================== CONFIGURATION ====================
         const CONFIG = {
             app: {
                 name: "Smart Money Pro",
@@ -462,12 +423,11 @@
                 joiningBonus: 30,
                 sponsorBonus: 20
             },
-            adsgram: { enabled: true, blockId: "task-27659", rewardAmount: 10 },
+            adsgram: { enabled: true, blockId: "int-25167", rewardAmount: 10 },
             monetag: { enabled: true, zones: ['9730885', '9500387', '9715370'], rewardAmount: 10 },
             social: { telegram: "https://t.me/+tLB334Ko71tjY2Y1", verificationLink: "https://t.me/Smart_money_pro_xbot" },
             bot: { adminChatId: "7793213912", reportChannelId: "-1003331749273" },
             support: { telegraphUrl: "https://t.me/smartmoneypro_bot" },
-            
             dailyJobLinks: {
                 job1: "https://omg10.com/4/9717825", job2: "https://omg10.com/4/9429975", job3: "https://omg10.com/4/9446627",
                 job4: "https://encouragementglutton.com/vc1xew7t?key=9a97915b9241db71d8f53e974a75a975",
@@ -483,7 +443,6 @@
                 job18: "https://omg10.com/4/9717825", job19: "https://t.me/o0Uq6h5R0p80ZGE1bot?startapp",
                 job20: "https://t.me/khelahobe07_bot?startapp"
             },
-            
             sponsorButtons: {
                 sponsor1: { name: "All Video Downloader", icon: "fas fa-download", link: "https://t.me/o0Uq6h5R0p80ZGE1bot?startapp", reward: 20 },
                 sponsor2: { name: "Movie Streaming", icon: "fas fa-film", link: "https://t.me/movieflex00bot?startapp", reward: 20 },
@@ -493,7 +452,6 @@
             }
         };
 
-        // ==================== VARIABLES ====================
         let currentUser = null, userData = null, currentJobTracking = null;
         let isAdsGramShowing = false, adsGramReady = false, AdController = null;
         let isMonetagShowing = false, monetagReady = false, monetagCount = 0, currentZoneIndex = 0, adsGramCount = 0;
@@ -501,7 +459,6 @@
         
         const tg = window.Telegram.WebApp;
 
-        // ==================== FIXED ADSGRAM INITIALIZATION ====================
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram with blockId:', CONFIG.adsgram.blockId);
             if (!CONFIG.adsgram.enabled) return;
@@ -567,7 +524,6 @@
                 saveDailyStats();
                 updateUI();
                 showAlert(`🎉 অভিনন্দন! ৳${CONFIG.app.adReward} আয় হয়েছে! (${adsGramCount}/10)`);
-                
             } catch(e) {
                 console.error('AdsGram show error:', e);
                 showAlert("অ্যাড দেখাতে সমস্যা হয়েছে। নেটওয়ার্ক চেক করে আবার চেষ্টা করুন।");
@@ -580,7 +536,6 @@
             }
         }
 
-        // ==================== MONETAG INITIALIZATION ====================
         function initializeMonetag() {
             if (!CONFIG.monetag.enabled) return;
             let ready = 0;
@@ -632,7 +587,6 @@
             finally { isMonetagShowing = false; btn && (btn.innerHTML = 'দেখুন', btn.disabled = false); }
         }
 
-        // ==================== STORAGE FUNCTIONS ====================
         function loadUserFromStorage(userId) { const stored = localStorage.getItem(`user_${userId}`); return stored ? JSON.parse(stored) : null; }
         function saveUserToStorage(data) { localStorage.setItem(`user_${currentUser.id}`, JSON.stringify(data)); }
         function loadWithdrawals() { return JSON.parse(localStorage.getItem(`withdrawals_${currentUser?.id}`) || '[]'); }
@@ -643,7 +597,6 @@
         function saveDailyStats() { localStorage.setItem(`stats_${dailyStats.date}`, JSON.stringify(dailyStats)); }
         function incrementStat(stat) { dailyStats[stat]++; saveDailyStats(); }
 
-        // ==================== CORE FUNCTIONS ====================
         function initTelegramApp() {
             tg.ready(); tg.expand();
             const user = tg.initDataUnsafe.user;
@@ -694,7 +647,6 @@
         }
         
         function showAlert(msg) { const a=document.getElementById('custom-alert'); document.getElementById('alert-message').innerText=msg; a.classList.remove('hidden'); document.getElementById('alert-ok-btn').onclick=()=>a.classList.add('hidden'); }
-        
         function openSupportPage() { tg.openLink(CONFIG.support.telegraphUrl); }
         
         async function handleVerification() {
