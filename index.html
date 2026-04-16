@@ -8,8 +8,8 @@
     <!-- Telegram WebApp -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <!-- AdsGram Ad Script - Correct SDK -->
-    <script src="https://cdn.adsgram.ai/js/adsgram.js"></script>
+    <!-- AdsGram Ad Script - CORRECT SDK (sad.min.js) -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     
     <!-- Monetag Ad Zones -->
     <script src='//libtl.com/sdk.js' data-zone='9730885' data-sdk='show_9730885'></script>
@@ -463,23 +463,29 @@
         
         const tg = window.Telegram.WebApp;
 
-        // ========== FIXED ADSGRAM - DIRECT AD SHOW ON BUTTON CLICK ==========
+        // ========== FIXED ADSGRAM - Using correct SDK (sad.min.js) ==========
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram with blockId:', CONFIG.adsgram.blockId);
             if (!CONFIG.adsgram.enabled) return;
             
+            // Check if Adsgram SDK is loaded (using sad.min.js)
             if (typeof window.Adsgram !== 'undefined' && window.Adsgram) {
                 try {
-                    AdController = window.Adsgram.init({ blockId: CONFIG.adsgram.blockId, debug: true });
+                    // Correct initialization as per AdsGram documentation
+                    AdController = window.Adsgram.init({ blockId: CONFIG.adsgram.blockId });
+                    
                     if (AdController && typeof AdController.show === 'function') {
                         adsGramReady = true;
-                        console.log('✅ AdsGram ready');
+                        console.log('✅ AdsGram ready successfully');
                         const btn = document.getElementById('ad-claim-btn');
-                        if (btn) btn.disabled = false;
+                        if (btn) {
+                            btn.disabled = false;
+                            btn.innerHTML = 'দেখুন';
+                        }
                         const statusSpan = document.getElementById('adsgram-status');
                         if (statusSpan) statusSpan.innerHTML = '✅ Active';
                     } else {
-                        console.error('AdController invalid');
+                        console.error('AdController invalid after init');
                         setTimeout(initializeAdsGram, 2000);
                     }
                 } catch(e) {
@@ -487,7 +493,7 @@
                     setTimeout(initializeAdsGram, 2000);
                 }
             } else {
-                console.log('Waiting for AdsGram SDK...');
+                console.log('AdsGram SDK not yet loaded, waiting...');
                 setTimeout(initializeAdsGram, 1000);
             }
         }
@@ -520,10 +526,13 @@
             }
             
             try {
-                console.log('Showing AdsGram ad...');
+                console.log('Showing AdsGram ad with blockId:', CONFIG.adsgram.blockId);
+                
                 // Directly call show() - this will display the ad immediately
+                // Using the correct method as per AdsGram documentation
                 const result = await AdController.show();
-                console.log('Ad result:', result);
+                
+                console.log('Ad completed successfully:', result);
                 
                 // If we reach here, ad was watched successfully
                 adsGramCount++;
@@ -538,9 +547,13 @@
                 
             } catch (error) {
                 console.error('AdsGram error:', error);
-                // Check if error is because no ads available
-                if (error && error.message && error.message.includes('No ads')) {
-                    showAlert("বর্তমানে কোনো অ্যাড নেই। কিছুক্ষণ পর আবার চেষ্টা করুন।");
+                // Check error type
+                if (error && error.message) {
+                    if (error.message.includes('no ads') || error.message.includes('No ads')) {
+                        showAlert("বর্তমানে কোনো অ্যাড নেই। কিছুক্ষণ পর আবার চেষ্টা করুন।");
+                    } else {
+                        showAlert("অ্যাড দেখাতে সমস্যা হয়েছে: " + error.message);
+                    }
                 } else {
                     showAlert("অ্যাড দেখাতে সমস্যা হয়েছে। নেটওয়ার্ক চেক করে আবার চেষ্টা করুন।");
                 }
