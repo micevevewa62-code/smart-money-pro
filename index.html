@@ -8,7 +8,7 @@
     <!-- Telegram WebApp -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <!-- AdsGram Ad Script - জোন আইডি: task-27659 -->
+    <!-- AdsGram Ad Script - জোন আইডি: task-27659 (Corrected) -->
     <script src="https://cdn.adsgram.ai/js/adsgram.js"></script>
     
     <!-- Monetag Ad Zones -->
@@ -462,7 +462,7 @@
                 joiningBonus: 30,
                 sponsorBonus: 20
             },
-            adsgram: { enabled: true, blockId: "int-25167", rewardAmount: 10 },
+            adsgram: { enabled: true, blockId: "task-27659", rewardAmount: 10 },
             monetag: { enabled: true, zones: ['9730885', '9500387', '9715370'], rewardAmount: 10 },
             social: { telegram: "https://t.me/+tLB334Ko71tjY2Y1", verificationLink: "https://t.me/Smart_money_pro_xbot" },
             bot: { adminChatId: "7793213912", reportChannelId: "-1003331749273" },
@@ -501,30 +501,45 @@
         
         const tg = window.Telegram.WebApp;
 
-        // ==================== ADSGRAM INITIALIZATION (FIXED) ====================
+        // ==================== FIXED ADSGRAM INITIALIZATION ====================
         function initializeAdsGram() {
             console.log('🔧 Initializing AdsGram with blockId:', CONFIG.adsgram.blockId);
-            
-            if (!CONFIG.adsgram.enabled) { console.log('AdsGram disabled'); return; }
+            if (!CONFIG.adsgram.enabled) return;
             
             if (typeof window.Adsgram !== 'undefined' && window.Adsgram) {
                 try {
                     AdController = window.Adsgram.init({ blockId: CONFIG.adsgram.blockId, debug: true });
                     if (AdController && typeof AdController.show === 'function') {
                         adsGramReady = true;
-                        console.log('✅ AdsGram ready');
-                        document.getElementById('ad-claim-btn') && (document.getElementById('ad-claim-btn').disabled = false);
-                        document.getElementById('adsgram-status') && (document.getElementById('adsgram-status').innerHTML = '✅ Active');
-                    } else { console.error('AdController invalid'); retryAdsGram(); }
-                } catch(e) { console.error('AdsGram init error:', e); retryAdsGram(); }
-            } else { console.log('AdsGram SDK loading...'); retryAdsGram(); }
+                        console.log('✅ AdsGram ready successfully');
+                        const btn = document.getElementById('ad-claim-btn');
+                        if (btn) btn.disabled = false;
+                        const statusSpan = document.getElementById('adsgram-status');
+                        if (statusSpan) statusSpan.innerHTML = '✅ Active';
+                    } else {
+                        console.error('AdController invalid after init');
+                        setTimeout(initializeAdsGram, 2000);
+                    }
+                } catch(e) {
+                    console.error('AdsGram init error:', e);
+                    setTimeout(initializeAdsGram, 2000);
+                }
+            } else {
+                console.log('AdsGram SDK not yet loaded, waiting...');
+                setTimeout(initializeAdsGram, 2000);
+            }
         }
         
-        function retryAdsGram() { setTimeout(initializeAdsGram, 2000); }
-        
         async function claimAdsGramReward() {
-            if (!adsGramReady) { showAlert("AdsGram প্রস্তুত হচ্ছে..."); initializeAdsGram(); return; }
-            if (isAdsGramShowing) { showAlert("অ্যাড চলছে..."); return; }
+            if (!adsGramReady) { 
+                showAlert("AdsGram প্রস্তুত হচ্ছে, একটু অপেক্ষা করুন..."); 
+                initializeAdsGram(); 
+                return; 
+            }
+            if (isAdsGramShowing) { 
+                showAlert("অ্যাড চলছে, দয়া করে অপেক্ষা করুন..."); 
+                return; 
+            }
             
             const today = new Date().toISOString().split('T')[0];
             if (adsGramCount >= CONFIG.app.dailyAdLimit.adsgram) {
@@ -533,12 +548,15 @@
             
             isAdsGramShowing = true;
             const btn = document.getElementById('ad-claim-btn');
-            btn && (btn.innerHTML = '⏳ লোডিং...', btn.disabled = true);
+            if (btn) { 
+                btn.innerHTML = '⏳ লোডিং...'; 
+                btn.disabled = true; 
+            }
             
             try {
-                showAlert("অ্যাড লোড হচ্ছে...");
+                showAlert("অ্যাড লোড হচ্ছে, দয়া করে অপেক্ষা করুন...");
                 const result = await AdController.show();
-                console.log('Ad completed:', result);
+                console.log('Ad completed successfully:', result);
                 
                 adsGramCount++;
                 userData.adsGramCount = adsGramCount;
@@ -548,9 +566,18 @@
                 saveUserToStorage(userData);
                 saveDailyStats();
                 updateUI();
-                showAlert(`🎉 ৳${CONFIG.app.adReward} আয় হয়েছে! (${adsGramCount}/10)`);
-            } catch(e) { console.error('AdsGram error:', e); showAlert("অ্যাড দেখাতে সমস্যা হয়েছে। পরে চেষ্টা করুন।"); }
-            finally { isAdsGramShowing = false; btn && (btn.innerHTML = 'দেখুন', btn.disabled = false); }
+                showAlert(`🎉 অভিনন্দন! ৳${CONFIG.app.adReward} আয় হয়েছে! (${adsGramCount}/10)`);
+                
+            } catch(e) {
+                console.error('AdsGram show error:', e);
+                showAlert("অ্যাড দেখাতে সমস্যা হয়েছে। নেটওয়ার্ক চেক করে আবার চেষ্টা করুন।");
+            } finally {
+                isAdsGramShowing = false;
+                if (btn) { 
+                    btn.innerHTML = 'দেখুন'; 
+                    btn.disabled = false; 
+                }
+            }
         }
 
         // ==================== MONETAG INITIALIZATION ====================
@@ -566,7 +593,6 @@
             document.getElementById('zone1-status') && (document.getElementById('zone1-status').innerHTML = typeof window.show_9730885 === 'function' ? '✅ Active' : '❌');
             document.getElementById('zone2-status') && (document.getElementById('zone2-status').innerHTML = typeof window.show_9500387 === 'function' ? '✅ Active' : '❌');
             document.getElementById('zone3-status') && (document.getElementById('zone3-status').innerHTML = typeof window.show_9715370 === 'function' ? '✅ Active' : '❌');
-            document.getElementById('today-monetag-count') && (document.getElementById('today-monetag-count').innerHTML = `${monetagCount}/30`);
             document.getElementById('zone-indicator') && (document.getElementById('zone-indicator').innerHTML = `Zone ${currentZoneIndex+1}/3`);
         }
         
@@ -810,7 +836,7 @@
         };
         
         function loadNotifications() {
-            const n = [{title:"পেমেন্ট আপডেট!",msg:"উইথড্র মিনিমাম ২০০০ টাকা করা হয়েছে।"},{title:"স্বাগতম!",msg:"Smart Money Pro-তে স্বাগতম!"},{title:"বোনাস অফার!",msg:"ভেরিফাই করে ৩০ টাকা বোনাস নিন!"}];
+            const n = [{title:"পেমেন্ট আপডেট!",msg:"উইথড্র মিনিমাম ২০০০ টাকা করা হয়েছে。"},{title:"স্বাগতম!",msg:"Smart Money Pro-তে স্বাগতম!"},{title:"বোনাস অফার!",msg:"ভেরিফাই করে ৩০ টাকা বোনাস নিন!"}];
             document.getElementById('notifications-list').innerHTML = n.map(not=>`<div class="card-bg p-4 rounded-xl"><h3 class="font-bold">${not.title}</h3><p class="text-sm text-gray-500">${not.msg}</p></div>`).join('');
         }
         
